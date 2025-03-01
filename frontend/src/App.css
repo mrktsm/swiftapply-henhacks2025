@@ -5,7 +5,6 @@
 @plugin "tailwindcss-animate";
 
 :root {
-
   --background: oklch(1 0 0);
 
   --foreground: oklch(0.13 0.028 261.692);
@@ -74,7 +73,6 @@
 }
 
 .dark {
-
   --background: oklch(0.13 0.028 261.692);
 
   --foreground: oklch(0.985 0.002 247.839);
@@ -141,7 +139,6 @@
 }
 
 @theme inline {
-
   --color-background: var(--background);
 
   --color-foreground: var(--foreground);
@@ -222,4 +219,19 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.montserrat-500 {
+  font-family: "Montserrat", serif;
+  font-optical-sizing: auto;
+  font-weight: 4 00;
+  font-style: normal;
+}
+
+.noto-sans-300 {
+  font-family: "Noto Sans", serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
 }

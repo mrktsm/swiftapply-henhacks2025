@@ -123,16 +123,16 @@ const JobApplicationDashboard = () => {
 
   return (
     <div
-      className="bg-gray-50 min-h-screen"
-      style={{
-        fontFamily:
-          "SF Pro Display, -apple-system, BlinkMacSystemFont, sans-serif",
-      }}
+      className="bg-white-50 min-h-screen"
+      //   style={{
+      //     fontFamily:
+      //       "SF Pro Display, -apple-system, BlinkMacSystemFont, sans-serif",
+      //   }}
     >
       {/* Header - iOS style navigation bar */}
-      <header className="bg-white bg-opacity-70 backdrop-blur-md border-b border-gray-100 sticky top-0 z-10">
+      <header className="bg-opacity-70 backdrop-blur-md border-b border-gray-100 sticky top-0 z-10 bg-gray-50">
         <div className="container mx-auto px-6 h-16 flex items-center justify-between">
-          <h1 className="text-2xl font-semibold bg-gradient-to-r from-red-400 to-red-500 bg-clip-text text-transparent">
+          <h1 className="text-2xl font-medium bg-gradient-to-r text-black bg-clip-text">
             Job Tracker
           </h1>
 
@@ -143,7 +143,7 @@ const JobApplicationDashboard = () => {
             <button className="p-2 rounded-full text-gray-500 hover:bg-gray-100 transition-colors">
               <Bell size={20} />
             </button>
-            <button className="bg-gradient-to-r from-red-400 to-red-500 hover:from-red-500 hover:to-red-600 text-white rounded-full py-2 px-6 font-medium text-sm shadow-md hover:shadow-lg transition-all duration-200">
+            <button className="bg-gradient-to-r from-rose-600 to-red-500 hover:from-rose-500 hover:to-red-400 text-white rounded-full py-2 px-6 font-medium text-sm shadow-md hover:shadow-lg transition-all duration-200">
               Apply to Jobs
             </button>
           </div>
@@ -153,10 +153,10 @@ const JobApplicationDashboard = () => {
       <div className="container mx-auto px-6 py-8">
         {/* Dashboard Stats */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden col-span-2 transform transition-transform hover:scale-[1.01] duration-300">
+          <div className=" rounded-xl shadow-sm border border-gray-100 overflow-hidden col-span-2 transform transition-transform hover:scale-[1.01] duration-300">
             <div className="p-6">
               <div className="mb-6">
-                <h2 className="text-xl font-semibold text-gray-800">
+                <h2 className="text-xl font-medium text-gray-800 text-left">
                   Application Overview
                 </h2>
               </div>
@@ -165,14 +165,12 @@ const JobApplicationDashboard = () => {
                 <div className="flex flex-col items-center justify-center p-4">
                   <div className="relative mb-2">
                     <ProgressCircle
-                      percentage={Math.round(
-                        (stats.totalApplications / 100) * 100
-                      )}
-                      radius={60}
-                      strokeWidth={12}
+                      percentage={50}
+                      radius={70}
+                      strokeWidth={15}
                       isLoading={loading}
                     />
-                    <div className="absolute inset-0 flex items-center justify-center text-2xl font-semibold text-gray-800">
+                    <div className="absolute inset-0 flex items-center justify-center text-3xl font-semibold text-gray-800">
                       {stats.totalApplications}
                     </div>
                   </div>
@@ -184,12 +182,12 @@ const JobApplicationDashboard = () => {
                 <div className="flex flex-col items-center justify-center p-4">
                   <div className="relative mb-2">
                     <ProgressCircle
-                      percentage={Math.round(stats.averageCompatibility)}
-                      radius={40}
-                      strokeWidth={8}
+                      percentage={50}
+                      radius={70}
+                      strokeWidth={15}
                       isLoading={loading}
                     />
-                    <div className="absolute inset-0 flex items-center justify-center text-2xl font-semibold text-gray-800">
+                    <div className="absolute inset-0 flex items-center justify-center text-3xl font-semibold text-gray-800">
                       {Math.round(stats.averageCompatibility)}
                     </div>
                   </div>
@@ -219,8 +217,8 @@ const JobApplicationDashboard = () => {
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 transform transition-transform hover:scale-[1.01] duration-300">
-            <h2 className="text-xl font-semibold mb-6 text-gray-800">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 transform transition-transform hover:scale-[1.01] duration-300 text-left">
+            <h2 className="text-xl font-medium mb-6 text-gray-800">
               Top Locations
             </h2>
             <ResponsiveContainer width="100%" height={220}>
@@ -298,7 +296,7 @@ const JobApplicationDashboard = () => {
                     <span className="text-xs text-gray-400 mr-4">
                       {job.applicants} applicants
                     </span>
-                    <button className="bg-red-500 hover:bg-red-600 text-white rounded-full py-1 px-4 text-sm">
+                    <button className="bg-rose-500 hover:bg-rose-600 text-white rounded-full py-1 px-4 text-sm">
                       Applied
                     </button>
                   </div>
@@ -320,12 +318,12 @@ const JobApplicationDashboard = () => {
                 </div>
 
                 <div className="flex mt-4 items-center">
-                  <div className="mr-4">
-                    {/* Replace ProgressRing with D3 ProgressCircle */}
+                  <div className="mr-4 flex flex-col items-center">
+                    {/* Progress Circle */}
                     <ProgressCircle
                       percentage={job.compatibility}
-                      radius={25}
-                      strokeWidth={5}
+                      radius={20}
+                      strokeWidth={4}
                       isLoading={loading}
                     />
                   </div>
@@ -337,7 +335,7 @@ const JobApplicationDashboard = () => {
                       {job.tags.map((tag, i) => (
                         <div
                           key={i}
-                          className="bg-red-100 text-red-700 px-2 py-1 rounded-full text-xs"
+                          className="bg-red-100 text-rose-700 px-2 py-1 rounded-full text-xs"
                         >
                           {tag}
                         </div>

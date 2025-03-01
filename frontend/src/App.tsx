@@ -5,7 +5,11 @@ import "./App.css";
 import JobApplicationDashboard from "./JobApplicationDashboard";
 
 function App() {
-  return <JobApplicationDashboard />;
+  return (
+    <div className="noto-500 text-center">
+      <JobApplicationDashboard />;
+    </div>
+  );
 }
 
 export default App;
