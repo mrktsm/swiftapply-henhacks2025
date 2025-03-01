@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   PieChart,
   Pie,
@@ -22,9 +22,19 @@ import {
   Search,
   Bell,
 } from "lucide-react";
+import ProgressCircle from "./components/ui/progressCircle";
 
 const JobApplicationDashboard = () => {
   const [expandedStats, setExpandedStats] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  // Simulate loading effect for demo
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1200);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Sample data for charts
   const positionTypeData = [
@@ -52,14 +62,14 @@ const JobApplicationDashboard = () => {
     { name: "Other", count: 14 },
   ];
 
-  // Apple-inspired color palette
+  // Light green-inspired color palette
   const COLORS = [
-    "#007AFF",
-    "#34C759",
-    "#FF9500",
-    "#FF2D55",
-    "#AF52DE",
-    "#5856D6",
+    "#4ade80", // light green (primary)
+    "#34C759", // green
+    "#FF9500", // orange
+    "#FF2D55", // pink
+    "#AF52DE", // purple
+    "#5856D6", // indigo
   ];
 
   // Mock applied jobs
@@ -111,99 +121,6 @@ const JobApplicationDashboard = () => {
     highestCompatibility: 96,
   };
 
-  const ProgressRing = ({ value, size = 70 }) => {
-    const strokeWidth = 3;
-    const radius = (size - strokeWidth) / 2;
-    const circumference = radius * 2 * Math.PI;
-    const strokeDashoffset = circumference - (value / 100) * circumference;
-
-    // Define color based on value
-    let gradientId = "blue-gradient";
-    if (value >= 90) {
-      gradientId = "green-gradient";
-    } else if (value < 70) {
-      gradientId = "orange-gradient";
-    }
-
-    return (
-      <div
-        className="relative flex items-center justify-center"
-        style={{ width: size, height: size }}
-      >
-        <svg width={size} height={size}>
-          <circle
-            className="text-gray-100"
-            strokeWidth={strokeWidth}
-            stroke="currentColor"
-            fill="transparent"
-            r={radius}
-            cx={size / 2}
-            cy={size / 2}
-          />
-          <circle
-            strokeWidth={strokeWidth}
-            strokeDasharray={circumference}
-            strokeDashoffset={strokeDashoffset}
-            strokeLinecap="round"
-            stroke={`url(#${gradientId})`}
-            fill="transparent"
-            r={radius}
-            cx={size / 2}
-            cy={size / 2}
-            style={{
-              transformOrigin: "50% 50%",
-              transform: "rotate(-90deg)",
-              transition: "stroke-dashoffset 0.5s ease-in-out",
-            }}
-          />
-          <defs>
-            <linearGradient
-              id="blue-gradient"
-              x1="0%"
-              y1="0%"
-              x2="100%"
-              y2="100%"
-            >
-              <stop offset="0%" stopColor="#007AFF" />
-              <stop offset="100%" stopColor="#5AC8FA" />
-            </linearGradient>
-            <linearGradient
-              id="green-gradient"
-              x1="0%"
-              y1="0%"
-              x2="100%"
-              y2="100%"
-            >
-              <stop offset="0%" stopColor="#34C759" />
-              <stop offset="100%" stopColor="#30D158" />
-            </linearGradient>
-            <linearGradient
-              id="orange-gradient"
-              x1="0%"
-              y1="0%"
-              x2="100%"
-              y2="100%"
-            >
-              <stop offset="0%" stopColor="#FF9500" />
-              <stop offset="100%" stopColor="#FFCC00" />
-            </linearGradient>
-          </defs>
-        </svg>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span
-            className="text-lg font-medium"
-            style={{
-              fontFamily:
-                "SF Pro Display, -apple-system, BlinkMacSystemFont, sans-serif",
-            }}
-          >
-            {value}%
-          </span>
-        </div>
-      </div>
-    );
-  };
-
   return (
     <div
       className="bg-gray-50 min-h-screen"
@@ -215,7 +132,7 @@ const JobApplicationDashboard = () => {
       {/* Header - iOS style navigation bar */}
       <header className="bg-white bg-opacity-70 backdrop-blur-md border-b border-gray-100 sticky top-0 z-10">
         <div className="container mx-auto px-6 h-16 flex items-center justify-between">
-          <h1 className="text-2xl font-semibold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">
+          <h1 className="text-2xl font-semibold bg-gradient-to-r from-red-400 to-red-500 bg-clip-text text-transparent">
             Job Tracker
           </h1>
 
@@ -226,7 +143,7 @@ const JobApplicationDashboard = () => {
             <button className="p-2 rounded-full text-gray-500 hover:bg-gray-100 transition-colors">
               <Bell size={20} />
             </button>
-            <button className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-full py-2 px-6 font-medium text-sm shadow-md hover:shadow-lg transition-all duration-200">
+            <button className="bg-gradient-to-r from-red-400 to-red-500 hover:from-red-500 hover:to-red-600 text-white rounded-full py-2 px-6 font-medium text-sm shadow-md hover:shadow-lg transition-all duration-200">
               Apply to Jobs
             </button>
           </div>
@@ -238,147 +155,67 @@ const JobApplicationDashboard = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
           <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden col-span-2 transform transition-transform hover:scale-[1.01] duration-300">
             <div className="p-6">
-              <div className="flex justify-between items-center mb-6">
+              <div className="mb-6">
                 <h2 className="text-xl font-semibold text-gray-800">
                   Application Overview
                 </h2>
-                <button
-                  onClick={() => setExpandedStats(!expandedStats)}
-                  className="text-gray-400 hover:text-gray-600 p-2 rounded-full hover:bg-gray-100 transition-colors"
-                >
-                  {expandedStats ? (
-                    <ChevronDown size={20} />
-                  ) : (
-                    <ChevronRight size={20} />
-                  )}
-                </button>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="flex flex-col items-center justify-center p-4 rounded-xl bg-gradient-to-br from-blue-50 to-blue-100">
-                  <div className="text-4xl font-semibold mb-2 text-blue-600">
-                    {stats.totalApplications}
+                <div className="flex flex-col items-center justify-center p-4">
+                  <div className="relative mb-2">
+                    <ProgressCircle
+                      percentage={Math.round(
+                        (stats.totalApplications / 100) * 100
+                      )}
+                      radius={60}
+                      strokeWidth={12}
+                      isLoading={loading}
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center text-2xl font-semibold text-gray-800">
+                      {stats.totalApplications}
+                    </div>
                   </div>
                   <div className="text-gray-500 font-medium">
                     Total Applications
                   </div>
                 </div>
 
-                <div className="flex flex-col items-center justify-center p-4 rounded-xl bg-gradient-to-br from-green-50 to-green-100">
-                  <div className="flex items-center">
-                    <div className="text-4xl font-semibold mr-1 text-green-600">
-                      {stats.averageCompatibility}
+                <div className="flex flex-col items-center justify-center p-4">
+                  <div className="relative mb-2">
+                    <ProgressCircle
+                      percentage={Math.round(stats.averageCompatibility)}
+                      radius={40}
+                      strokeWidth={8}
+                      isLoading={loading}
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center text-2xl font-semibold text-gray-800">
+                      {Math.round(stats.averageCompatibility)}
                     </div>
-                    <div className="text-lg text-green-600">%</div>
                   </div>
                   <div className="text-gray-500 font-medium">
                     Avg. Compatibility
                   </div>
                 </div>
 
-                <div className="flex flex-col items-center justify-center p-4 rounded-xl bg-gradient-to-br from-purple-50 to-purple-100">
-                  <div className="flex gap-6">
-                    <div className="text-center">
-                      <div className="text-2xl font-semibold text-purple-600">
-                        {stats.interviews}
-                      </div>
-                      <div className="text-xs text-gray-500 font-medium">
-                        Interviews
-                      </div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-semibold text-purple-600">
-                        {stats.offers}
-                      </div>
-                      <div className="text-xs text-gray-500 font-medium">
-                        Offers
-                      </div>
+                <div className="flex flex-col items-center justify-center p-4">
+                  <div className="relative mb-2">
+                    <ProgressCircle
+                      percentage={Math.round(
+                        (stats.interviews / stats.totalApplications) * 100
+                      )}
+                      radius={40}
+                      strokeWidth={8}
+                      isLoading={loading}
+                      color="#8B5CF6"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center text-2xl font-semibold text-gray-800">
+                      {stats.interviews}
                     </div>
                   </div>
+                  <div className="text-gray-500 font-medium">Interviews</div>
                 </div>
               </div>
-
-              {expandedStats && (
-                <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-gray-100">
-                  <div className="h-64">
-                    <h3 className="text-sm font-medium text-gray-500 mb-4">
-                      Position Types
-                    </h3>
-                    <ResponsiveContainer width="100%" height="100%">
-                      <PieChart>
-                        <Pie
-                          data={positionTypeData}
-                          cx="50%"
-                          cy="50%"
-                          innerRadius={60}
-                          outerRadius={80}
-                          paddingAngle={2}
-                          dataKey="value"
-                          labelLine={false}
-                          label={({ name, percent }) =>
-                            `${name.split(" ")[0]} ${(percent * 100).toFixed(
-                              0
-                            )}%`
-                          }
-                        >
-                          {positionTypeData.map((entry, index) => (
-                            <Cell
-                              key={`cell-${index}`}
-                              fill={COLORS[index % COLORS.length]}
-                            />
-                          ))}
-                        </Pie>
-                        <Tooltip
-                          contentStyle={{
-                            borderRadius: "8px",
-                            backgroundColor: "rgba(255, 255, 255, 0.8)",
-                            backdropFilter: "blur(8px)",
-                            border: "none",
-                            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
-                          }}
-                        />
-                      </PieChart>
-                    </ResponsiveContainer>
-                  </div>
-
-                  <div className="h-64">
-                    <h3 className="text-sm font-medium text-gray-500 mb-4">
-                      Compatibility Distribution
-                    </h3>
-                    <ResponsiveContainer width="100%" height="100%">
-                      <BarChart data={compatibilityData} barCategoryGap={12}>
-                        <XAxis
-                          dataKey="name"
-                          axisLine={false}
-                          tickLine={false}
-                        />
-                        <YAxis axisLine={false} tickLine={false} />
-                        <Tooltip
-                          contentStyle={{
-                            borderRadius: "8px",
-                            backgroundColor: "rgba(255, 255, 255, 0.8)",
-                            backdropFilter: "blur(8px)",
-                            border: "none",
-                            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
-                          }}
-                        />
-                        <Bar
-                          dataKey="count"
-                          radius={[4, 4, 0, 0]}
-                          background={{ fill: "#f5f5f7" }}
-                        >
-                          {compatibilityData.map((entry, index) => (
-                            <Cell
-                              key={`cell-${index}`}
-                              fill={COLORS[Math.min(5 - index, 5)]}
-                            />
-                          ))}
-                        </Bar>
-                      </BarChart>
-                    </ResponsiveContainer>
-                  </div>
-                </div>
-              )}
             </div>
           </div>
 
@@ -412,7 +249,7 @@ const JobApplicationDashboard = () => {
                 <Bar
                   dataKey="count"
                   radius={[0, 4, 4, 0]}
-                  fill="#007AFF"
+                  fill="#4ade80"
                   background={{ fill: "#f5f5f7" }}
                 />
               </BarChart>
@@ -461,7 +298,7 @@ const JobApplicationDashboard = () => {
                     <span className="text-xs text-gray-400 mr-4">
                       {job.applicants} applicants
                     </span>
-                    <button className="bg-blue-500 hover:bg-blue-600 text-white rounded-full py-1 px-4 text-sm">
+                    <button className="bg-red-500 hover:bg-red-600 text-white rounded-full py-1 px-4 text-sm">
                       Applied
                     </button>
                   </div>
@@ -484,7 +321,13 @@ const JobApplicationDashboard = () => {
 
                 <div className="flex mt-4 items-center">
                   <div className="mr-4">
-                    <ProgressRing value={job.compatibility} size={50} />
+                    {/* Replace ProgressRing with D3 ProgressCircle */}
+                    <ProgressCircle
+                      percentage={job.compatibility}
+                      radius={25}
+                      strokeWidth={5}
+                      isLoading={loading}
+                    />
                   </div>
                   <div>
                     <div className="text-sm font-medium mb-2">
@@ -494,7 +337,7 @@ const JobApplicationDashboard = () => {
                       {job.tags.map((tag, i) => (
                         <div
                           key={i}
-                          className="bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-xs"
+                          className="bg-red-100 text-red-700 px-2 py-1 rounded-full text-xs"
                         >
                           {tag}
                         </div>
