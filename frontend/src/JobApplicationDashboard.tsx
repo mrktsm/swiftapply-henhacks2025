@@ -153,7 +153,7 @@ const JobApplicationDashboard = () => {
     <div className="bg-gradient-to-br from-gray-900 to-gray-800 min-h-screen text-gray-200">
       {/* Header - iOS style navigation bar */}
       <header className="bg-gray-800 bg-opacity-70 backdrop-blur-md border-b border-gray-700 sticky top-0 z-10">
-        <div className="container mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="container mx-auto px-6 h-16 flex items-center justify-between cursor-pointer">
           <h1 className="text-2xl bg-gradient-to-r text-white bg-clip-text font-thin">
             <div className="flex justify-between">
               <img src="red bird.svg" className="h-[32px] mr-2" />
@@ -166,13 +166,13 @@ const JobApplicationDashboard = () => {
           </h1>
 
           <div className="flex items-center space-x-4">
-            <button className="p-2 rounded-full text-gray-300 hover:bg-gray-700 transition-colors">
+            <button className="p-2 rounded-full text-gray-300 hover:bg-gray-700 transition-colors cursor-pointer">
               <Search size={20} />
             </button>
-            <button className="p-2 rounded-full text-gray-300 hover:bg-gray-700 transition-colors">
+            <button className="p-2 rounded-full text-gray-300 hover:bg-gray-700 transition-colors cursor-pointer">
               <Bell size={20} />
             </button>
-            <button className="bg-gradient-to-r from-rose-600 to-red-500 hover:from-rose-500 hover:to-red-400 text-white rounded-full py-2 px-6 font-medium text-sm shadow-md hover:shadow-lg transition-all duration-200">
+            <button className="bg-gradient-to-r from-rose-600 to-red-500 hover:from-rose-500 hover:to-red-400 text-white rounded-full py-2 px-6 font-medium text-sm shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer">
               Apply to Jobs
             </button>
           </div>
@@ -226,7 +226,7 @@ const JobApplicationDashboard = () => {
                       isLoading={loading}
                     />
                     <div className="absolute inset-0 flex items-center justify-center text-3xl font-semibold text-gray-100 comfortaa-300">
-                      {Math.round(stats.averageCompatibility)}
+                      {Math.round(stats.averageCompatibility)}%
                     </div>
                   </div>
                   <div className="text-gray-300 font-medium">
@@ -352,7 +352,7 @@ const JobApplicationDashboard = () => {
                     <span className="text-xs text-gray-400 mr-4">
                       {job.applicants} applicants
                     </span>
-                    <button className="bg-rose-500 hover:bg-rose-600 text-white rounded-full py-1 px-4 text-sm">
+                    <button className="bg-rose-500 hover:bg-rose-600 text-white rounded-full py-1 px-4 text-sm cursor-pointer">
                       Applied
                     </button>
                   </div>
@@ -374,15 +374,20 @@ const JobApplicationDashboard = () => {
                 </div>
 
                 <div className="flex mt-4 items-center">
-                  <div className="mr-4 flex flex-col items-center">
+                  <div className="relative flex items-center justify-center mr-2">
                     {/* Progress Circle */}
                     <ProgressCircle
                       percentage={job.compatibility}
-                      radius={20}
+                      radius={22}
                       strokeWidth={6}
                       isLoading={loading}
                     />
+                    {/* Number inside the circle */}
+                    <span className="absolute text-[10px] comfortaa-300">
+                      {job.compatibility}%
+                    </span>
                   </div>
+
                   <div>
                     <div className="text-sm font-medium mb-2 text-gray-200">
                       Match Factors
