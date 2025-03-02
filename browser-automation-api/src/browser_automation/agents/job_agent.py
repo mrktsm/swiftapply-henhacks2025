@@ -10,18 +10,19 @@ class JobAgent:
     def __init__(self, sensitive_data, resume_path):
         self.sensitive_data = sensitive_data
         self.resume_path = resume_path
+        self.agent = None
 
     async def run(self):
         try:
-            # Initialize components here instead of in __init__ to better handle errors
+            # Configure browser to use CDP endpoint
             config = BrowserConfig(
-                chrome_instance_path="C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+                chrome_instance_path="C:\Program Files\Google\Chrome\Application\chrome.exe"
             )
             
             controller = Controller()
             browser = Browser(config=config)
             
-            agent = Agent(
+            self.agent = Agent(  # Save reference to agent
                 task=(
                     "Go to jobright.ai, sign in using google, whenever prompted by website to "
                     "check if human, wait a few seconds and press the checkbox, "
@@ -37,18 +38,22 @@ class JobAgent:
             )
             
             # Run the agent
-            result = await agent.run()
+            result = await self.agent.run()
             return {"status": "success", "result": result}
             
         except Exception as e:
             print(f"Error in JobAgent: {e}")
             return {"status": "error", "details": str(e)}
 
-    def upload_file(self):
+    async def upload_file(self):
+        """Make this async and fix the reference to self.agent"""
         if not os.path.exists(self.resume_path):
             return f"Error: File {self.resume_path} does not exist."
         
         try:
+            if not self.agent:
+                return "Error: Agent not initialized. Call run() first."
+                
             file_input = self.agent.page.query_selector('input[type="file"]')
             if not file_input:
                 return "Error: No file input found on the current page."
