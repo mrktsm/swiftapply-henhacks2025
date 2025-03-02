@@ -1,7 +1,13 @@
 import React from "react";
 import { Search, Bell, ChevronRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
+  const navigate = useNavigate(); // Create the navigate function
+
+  const handleSignInClick = () => {
+    navigate("/login"); // Navigate to the login page when the button is clicked
+  };
   return (
     <div className="min-h-screen text-gray-200 relative">
       {/* Complex gradient background - balanced pink and red */}
@@ -40,7 +46,10 @@ const LandingPage = () => {
             <button className="p-2 rounded-full text-pink-100 hover:bg-pink-900/30 transition-colors">
               <Bell size={20} />
             </button>
-            <button className="bg-gradient-to-r from-rose-600 to-pink-500 hover:from-rose-500 hover:to-pink-400 text-white rounded-full py-2 px-6 font-medium text-sm shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer">
+            <button
+              onClick={handleSignInClick}
+              className="bg-gradient-to-r from-rose-600 to-pink-500 hover:from-rose-500 hover:to-pink-400 text-white rounded-full py-2 px-6 font-medium text-sm shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer"
+            >
               Sign Up For Free
             </button>
           </div>
@@ -59,7 +68,10 @@ const LandingPage = () => {
             focus on what matters most.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
-            <button className="bg-gradient-to-r from-rose-600 to-pink-500 hover:from-rose-500 hover:to-pink-400 text-white rounded-full py-3 px-8 font-medium text-lg shadow-lg hover:shadow-xl transition-all duration-200 cursor-pointer">
+            <button
+              onClick={handleSignInClick}
+              className="bg-gradient-to-r from-rose-600 to-pink-500 hover:from-rose-500 hover:to-pink-400 text-white rounded-full py-3 px-8 font-medium text-lg shadow-lg hover:shadow-xl transition-all duration-200 cursor-pointer"
+            >
               Save Time Now
             </button>
             <button className="bg-gray-900/30 backdrop-blur-sm border border-pink-500/30 hover:bg-pink-900/30 text-white rounded-full py-3 px-8 font-medium text-lg shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center cursor-pointer">

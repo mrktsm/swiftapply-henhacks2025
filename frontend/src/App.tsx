@@ -23,60 +23,59 @@ function App() {
   };
 
   return (
-    // <BrowserRouter>
-    //   <div className="nano-sans-300">
-    //     <Routes>
-    //       {/* Sign In Route */}
-    //       <Route
-    //         path="/"
-    //         element={
-    //           isAuthenticated ? (
-    //             hasCompletedForm ? (
-    //               <Navigate to="/dashboard" replace />
-    //             ) : (
-    //               <Navigate to="/profile-setup" replace />
-    //             )
-    //           ) : (
-    //             <SignInPage onAuthSuccess={() => setIsAuthenticated(true)} />
-    //           )
-    //         }
-    //       />
+    <BrowserRouter>
+      <div className="nano-sans-300">
+        <Routes>
+          <Route path="/" element={<LandingPage />}></Route>
+          <Route
+            path="/login"
+            element={
+              isAuthenticated ? (
+                hasCompletedForm ? (
+                  <Navigate to="/dashboard" replace />
+                ) : (
+                  <Navigate to="/profile-setup" replace />
+                )
+              ) : (
+                <SignInPage onAuthSuccess={() => setIsAuthenticated(true)} />
+              )
+            }
+          />
 
-    //       {/* Form Route */}
-    //       <Route
-    //         path="/profile-setup"
-    //         element={
-    //           isAuthenticated ? (
-    //             hasCompletedForm ? (
-    //               <Navigate to="/dashboard" replace />
-    //             ) : (
-    //               <FormPage onFormComplete={() => setHasCompletedForm(true)} />
-    //             )
-    //           ) : (
-    //             <Navigate to="/" replace />
-    //           )
-    //         }
-    //       />
+          {/* Form Route */}
+          <Route
+            path="/profile-setup"
+            element={
+              isAuthenticated ? (
+                hasCompletedForm ? (
+                  <Navigate to="/dashboard" replace />
+                ) : (
+                  <FormPage onFormComplete={() => setHasCompletedForm(true)} />
+                )
+              ) : (
+                <Navigate to="/" replace />
+              )
+            }
+          />
 
-    //       {/* Dashboard Route */}
-    //       <Route
-    //         path="/dashboard"
-    //         element={
-    //           isAuthenticated ? (
-    //             hasCompletedForm ? (
-    //               <JobApplicationDashboard />
-    //             ) : (
-    //               <Navigate to="/profile-setup" replace />
-    //             )
-    //           ) : (
-    //             <Navigate to="/" replace />
-    //           )
-    //         }
-    //       />
-    //     </Routes>
-    //   </div>
-    // </BrowserRouter>
-    <LandingPage />
+          {/* Dashboard Route */}
+          <Route
+            path="/dashboard"
+            element={
+              isAuthenticated ? (
+                hasCompletedForm ? (
+                  <JobApplicationDashboard />
+                ) : (
+                  <Navigate to="/profile-setup" replace />
+                )
+              ) : (
+                <Navigate to="/" replace />
+              )
+            }
+          />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
