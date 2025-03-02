@@ -104,7 +104,7 @@ const SignInPage = ({ onAuthSuccess }: SignInPageProps) => {
         {/* Logo and title */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-rose-600 to-red-500 mb-4">
-            <Briefcase className="w-8 h-8 text-white" />
+            <img src="white bird.svg" className="w-9 h-9 text-white" />
           </div>
           <h1 className="text-3xl font-bold text-white">Job Dashboard</h1>
           <p className="text-gray-400 mt-2">
@@ -211,27 +211,6 @@ const SignInPage = ({ onAuthSuccess }: SignInPageProps) => {
         </div>
       </div>
     </div>
-  );
-};
-
-// Import this component to use it
-const Briefcase = (props: any) => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      {...props}
-    >
-      <rect width="20" height="14" x="2" y="7" rx="2" ry="2" />
-      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-    </svg>
   );
 };
 
