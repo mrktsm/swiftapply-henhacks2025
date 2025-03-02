@@ -1,16 +1,38 @@
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
 import JobApplicationDashboard from "./JobApplicationDashboard";
 import SignInPage from "./SignInPage";
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   return (
-    <div className="noto-500 text-center">
-      {/* <JobApplicationDashboard />; */}
-      <SignInPage />
-    </div>
+    <BrowserRouter>
+      <div className="noto-500">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              isAuthenticated ? (
+                <Navigate to="/dashboard" replace />
+              ) : (
+                <SignInPage onAuthSuccess={() => setIsAuthenticated(true)} />
+              )
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              isAuthenticated ? (
+                <JobApplicationDashboard />
+              ) : (
+                <Navigate to="/" replace />
+              )
+            }
+          />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 

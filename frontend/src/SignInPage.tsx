@@ -57,7 +57,7 @@ const StyledGoogleButton = ({
   );
 };
 
-const SignInPage = () => {
+const SignInPage = ({ onAuthSuccess }: SignInPageProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -94,6 +94,8 @@ const SignInPage = () => {
     // 1. Send the credential to your backend
     // 2. Handle authentication in your system
     // 3. Store tokens and redirect user
+    onAuthSuccess();
+    localStorage.setItem("userToken", credentialResponse.credential);
   };
 
   return (
