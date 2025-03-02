@@ -102,7 +102,7 @@ const JobApplicationDashboard = () => {
       company: "Rokt",
       location: "Seattle, WA",
       type: "Internship",
-      salary: "$45/hr",
+      salary: "45/hr",
       compatibility: 84,
       tags: ["Comp. & Benefits", "H1B Sponsor Likely"],
       applicants: "200+",
@@ -114,7 +114,7 @@ const JobApplicationDashboard = () => {
       company: "Stripe",
       location: "San Francisco, CA",
       type: "Internship",
-      salary: "$52/hr",
+      salary: "52/hr",
       compatibility: 92,
       tags: ["Skills Match", "Culture Fit"],
       applicants: "340+",
@@ -126,7 +126,7 @@ const JobApplicationDashboard = () => {
       company: "Amazon",
       location: "Seattle, WA",
       type: "Internship",
-      salary: "$50/hr",
+      salary: "50/hr",
       compatibility: 78,
       tags: ["Experience Match", "H1B Sponsor"],
       applicants: "500+",
@@ -144,12 +144,12 @@ const JobApplicationDashboard = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-gray-900 to-gray-700 min-h-screen text-gray-200">
+    <div className="bg-gradient-to-br from-gray-900 to-gray-800 min-h-screen text-gray-200">
       {/* Header - iOS style navigation bar */}
       <header className="bg-gray-800 bg-opacity-70 backdrop-blur-md border-b border-gray-700 sticky top-0 z-10">
         <div className="container mx-auto px-6 h-16 flex items-center justify-between">
           <h1 className="text-2xl font-medium bg-gradient-to-r text-white bg-clip-text">
-            Job Tracker
+            Job Dashboard
           </h1>
 
           <div className="flex items-center space-x-4">
@@ -260,7 +260,7 @@ const JobApplicationDashboard = () => {
                   />
                   <Tooltip
                     contentStyle={{
-                      borderRadius: "8px",
+                      borderRadius: "9px",
                       backgroundColor: "#2d3748", // Dark background for tooltip
                       border: "none",
                       boxShadow: "0 4px 12px rgba(0, 0, 0, 0.3)",
@@ -301,7 +301,7 @@ const JobApplicationDashboard = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-4">
+        <div className="grid grid-cols-1 gap-4 text-left">
           {appliedJobs.map((job) => (
             <div
               key={job.id}
