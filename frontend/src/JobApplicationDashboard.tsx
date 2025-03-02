@@ -205,7 +205,7 @@ const JobApplicationDashboard = () => {
                     Total Applications
                   </div>
                 </div>
-                <div className="flex flex-col items-center justify-center p-2 -mt-20 ">
+                <div className="flex flex-col items-center justify-center p-2 -mt-20">
                   <div className="relative mb-2">
                     <ConcentricProgressCircles
                       rings={multipleRings}
@@ -214,6 +214,21 @@ const JobApplicationDashboard = () => {
                   </div>
                   <div className="text-gray-300 font-medium -mt-25">
                     Job Type Breakdown
+                  </div>
+                  {/* Legend for job type breakdown */}
+                  <div className="flex space-x-4 mt-4">
+                    <div className="flex items-center space-x-2 mt-2">
+                      <span className="w-4 h-4 bg-red-500 rounded-full"></span>
+                      <span className="text-gray-300 text-sm">Frontend</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <span className="w-4 h-4 bg-lime-500 rounded-full"></span>
+                      <span className="text-gray-300 text-sm">Devops</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <span className="w-4 h-4 bg-cyan-500 rounded-full"></span>
+                      <span className="text-gray-300 text-sm">Backend</span>
+                    </div>
                   </div>
                 </div>
                 <div className="flex flex-col items-center justify-center">
@@ -235,6 +250,7 @@ const JobApplicationDashboard = () => {
               </div>
             </div>
           </div>
+
           <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6 transform transition-transform duration-300 text-left h-full">
             <h2 className="text-xl font-medium mb-6 text-gray-100">
               Daily Applications
