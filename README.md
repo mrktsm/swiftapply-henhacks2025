@@ -40,3 +40,5 @@ We developed SwiftApply as a web platform using:
 - **Smart Recommendations**: Enhance feedback reports to include personalized resume improvements and skill-building suggestions.
 
 SwiftApply aims to revolutionize job applications, making career-building effortless and intelligent!
+![bird 1](https://github.com/user-attachments/assets/fe263478-a82e-45a5-8d40-88aa56d4aeb1)
+
