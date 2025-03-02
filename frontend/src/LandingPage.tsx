@@ -134,16 +134,19 @@ const LandingPage = () => {
       </div>
 
       {/* Call to Action */}
-      <div className="bg-gray-900/50 backdrop-blur-sm py-16 mt-16 border-t border-pink-900/30">
+      <div className="bg-gray-900/50 backdrop-blur-sm py-16 mt-16 border-t border-pink-900/30 font-thin">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-4 text-white">
+          <h2 className="text-3xl font-thin mb-4 text-white">
             Ready to let AI handle your job search?
           </h2>
           <p className="text-pink-100/80 mb-8 max-w-2xl mx-auto">
             Join thousands of professionals who save 20+ hours weekly by letting
             our AI agent apply to jobs while they focus on interview prep.
           </p>
-          <button className="bg-gradient-to-r from-rose-600 to-pink-500 hover:from-rose-500 hover:to-pink-400 text-white rounded-full py-3 px-8 font-medium text-lg shadow-lg hover:shadow-xl transition-all duration-200">
+          <button
+            onClick={handleSignInClick}
+            className="bg-gradient-to-r font-thin from-rose-600 to-pink-500 hover:from-rose-500 hover:to-pink-400 text-white rounded-full py-3 px-8 text-lg shadow-lg hover:shadow-xl transition-all duration-200"
+          >
             Start Saving Time Today
           </button>
         </div>
