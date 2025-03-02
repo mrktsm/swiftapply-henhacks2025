@@ -74,13 +74,14 @@ const JobApplicationDashboard = () => {
     { name: "0-59%", count: 5 },
   ];
 
-  const locationData = [
-    { name: "Seattle", count: 28 },
-    { name: "Remote", count: 22 },
-    { name: "SF Bay Area", count: 17 },
-    { name: "New York", count: 12 },
-    { name: "Austin", count: 7 },
-    { name: "Other", count: 14 },
+  const applicationData = [
+    { name: "Mon", count: 12 },
+    { name: "Tue", count: 18 },
+    { name: "Wed", count: 15 },
+    { name: "Thu", count: 22 },
+    { name: "Fri", count: 20 },
+    { name: "Sat", count: 8 },
+    { name: "Sun", count: 5 },
   ];
 
   // Light green-inspired color palette
@@ -198,7 +199,7 @@ const JobApplicationDashboard = () => {
                     Total Applications
                   </div>
                 </div>
-                <div className="flex flex-col items-center justify-center p-2 -mt-25">
+                <div className="flex flex-col items-center justify-center p-2 -mt-20">
                   <div className="relative mb-2">
                     <ConcentricProgressCircles
                       rings={multipleRings}
@@ -231,42 +232,75 @@ const JobApplicationDashboard = () => {
               </div>
             </div>
           </div>
-
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 transform transition-transform hover:scale-[1.01] duration-300 text-left">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 transform transition-transform hover:scale-[1.01] duration-300 text-left h-full">
             <h2 className="text-xl font-medium mb-6 text-gray-800">
-              Top Locations
+              Daily Applications
             </h2>
-            <ResponsiveContainer width="100%" height={220}>
-              <BarChart
-                data={locationData}
-                layout="vertical"
-                barCategoryGap={12}
-              >
-                <XAxis type="number" axisLine={false} tickLine={false} />
-                <YAxis
-                  dataKey="name"
-                  type="category"
-                  width={80}
-                  axisLine={false}
-                  tickLine={false}
-                />
-                <Tooltip
-                  contentStyle={{
-                    borderRadius: "8px",
-                    backgroundColor: "rgba(255, 255, 255, 0.8)",
-                    backdropFilter: "blur(8px)",
-                    border: "none",
-                    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
-                  }}
-                />
-                <Bar
-                  dataKey="count"
-                  radius={[0, 4, 4, 0]}
-                  fill="#4ade80"
-                  background={{ fill: "#f5f5f7" }}
-                />
-              </BarChart>
-            </ResponsiveContainer>
+            <div className="h-[calc(100%-4rem)]">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart
+                  data={applicationData}
+                  margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+                >
+                  <defs>
+                    <linearGradient
+                      id="colorGradient"
+                      x1="0"
+                      y1="0"
+                      x2="0"
+                      y2="1"
+                    >
+                      <stop offset="0%" stopColor="#ff0f7b" stopOpacity={1} />{" "}
+                      {/* Vibrant pink */}
+                      <stop
+                        offset="50%"
+                        stopColor="#f89b9b"
+                        stopOpacity={1}
+                      />{" "}
+                      {/* Mid-tone */}
+                      <stop
+                        offset="100%"
+                        stopColor="#ff3366"
+                        stopOpacity={1}
+                      />{" "}
+                      {/* Deep rose */}
+                    </linearGradient>
+                  </defs>
+                  <XAxis
+                    dataKey="name"
+                    axisLine={false}
+                    tickLine={false}
+                    dy={10}
+                  />
+                  <YAxis axisLine={false} tickLine={false} dx={-10} />
+                  <Tooltip
+                    contentStyle={{
+                      borderRadius: "8px",
+                      backgroundColor: "rgba(255, 255, 255, 0.8)",
+                      backdropFilter: "blur(8px)",
+                      border: "none",
+                      boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+                    }}
+                  />
+                  <Bar
+                    dataKey="count"
+                    fill="url(#colorGradient)"
+                    radius={[4, 4, 0, 0]}
+                    barSize={35}
+                    animationBegin={0}
+                    animationDuration={1500}
+                    animationEasing="ease-out"
+                  >
+                    {applicationData.map((entry, index) => (
+                      <Cell
+                        key={`cell-${index}`}
+                        fillOpacity={0.95} // Increased opacity for more vibrant colors
+                      />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
           </div>
         </div>
 
