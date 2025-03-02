@@ -1,42 +1,80 @@
-import { GoogleOAuthProvider } from "@react-oauth/google";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useState } from "react";
 import JobApplicationDashboard from "./JobApplicationDashboard";
 import SignInPage from "./SignInPage";
-import FormPage from "./FormPage";
+import FormPage from "./ProfileSetupForm";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [hasCompletedForm, setHasCompletedForm] = useState(false);
+
+  // Check if user has completed form in localStorage on component mount
+  useState(() => {
+    const formStatus = localStorage.getItem("hasCompletedForm");
+    if (formStatus === "true") {
+      setHasCompletedForm(true);
+    }
+  }, []);
+
+  const handleFormCompletion = () => {
+    setHasCompletedForm(true);
+    localStorage.setItem("hasCompletedForm", "true");
+  };
+
   return (
-    // <BrowserRouter>
-    //   <div className="noto-500">
-    //     <Routes>
-    //       <Route
-    //         path="/"
-    //         element={
-    //           isAuthenticated ? (
-    //             <Navigate to="/dashboard" replace />
-    //           ) : (
-    //             <SignInPage onAuthSuccess={() => setIsAuthenticated(true)} />
-    //           )
-    //         }
-    //       />
-    //       <Route
-    //         path="/dashboard"
-    //         element={
-    //           isAuthenticated ? (
-    //             <JobApplicationDashboard />
-    //           ) : (
-    //             <Navigate to="/" replace />
-    //           )
-    //         }
-    //       />
-    //     </Routes>
-    //   </div>
-    // </BrowserRouter>
-    <div className="monteserrat-500">
-      <FormPage />
-    </div>
+    <BrowserRouter>
+      <div className="noto-500">
+        <Routes>
+          {/* Sign In Route */}
+          <Route
+            path="/"
+            element={
+              isAuthenticated ? (
+                hasCompletedForm ? (
+                  <Navigate to="/dashboard" replace />
+                ) : (
+                  <Navigate to="/profile-setup" replace />
+                )
+              ) : (
+                <SignInPage onAuthSuccess={() => setIsAuthenticated(true)} />
+              )
+            }
+          />
+
+          {/* Form Route */}
+          <Route
+            path="/profile-setup"
+            element={
+              isAuthenticated ? (
+                hasCompletedForm ? (
+                  <Navigate to="/dashboard" replace />
+                ) : (
+                  <FormPage />
+                )
+              ) : (
+                <Navigate to="/" replace />
+              )
+            }
+          />
+
+          {/* Dashboard Route */}
+          <Route
+            path="/dashboard"
+            element={
+              isAuthenticated ? (
+                hasCompletedForm ? (
+                  <JobApplicationDashboard />
+                ) : (
+                  <Navigate to="/profile-setup" replace />
+                )
+              ) : (
+                <Navigate to="/" replace />
+              )
+            }
+          />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 

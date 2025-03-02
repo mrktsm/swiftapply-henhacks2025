@@ -1288,7 +1288,9 @@ const ProfileSetupForm = () => {
                 ? "bg-gradient-to-r from-rose-600 to-red-500 hover:from-rose-500 hover:to-red-400 text-white"
                 : "bg-gray-800 text-gray-500 cursor-not-allowed"
             }`}
-            onClick={console.log(formData)}
+            onClick={() => {
+              console.log(formData);
+            }}
             disabled={currentStep === 7}
           >
             Next
