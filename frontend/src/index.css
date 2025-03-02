@@ -5,3 +5,10 @@
 body {
   background-color: #1f2937;
 }
+
+.comfortaa-300 {
+  font-family: "Comfortaa", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}

@@ -123,7 +123,11 @@ const initialFormData: FormData = {
   },
 };
 
-const ProfileSetupForm = () => {
+interface FormPageProps {
+  onFormComplete: () => void;
+}
+
+const ProfileSetupForm = ({ onFormComplete }: FormPageProps) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [expanded, setExpanded] = useState({
     basic: true,
@@ -1290,6 +1294,7 @@ const ProfileSetupForm = () => {
             }`}
             onClick={() => {
               console.log(formData);
+              onFormComplete();
             }}
             disabled={currentStep === 7}
           >

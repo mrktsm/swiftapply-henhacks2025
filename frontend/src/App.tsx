@@ -23,7 +23,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="noto-500">
+      <div className="nano-sans-300">
         <Routes>
           {/* Sign In Route */}
           <Route
@@ -49,7 +49,7 @@ function App() {
                 hasCompletedForm ? (
                   <Navigate to="/dashboard" replace />
                 ) : (
-                  <FormPage />
+                  <FormPage onFormComplete={() => setHasCompletedForm(true)} />
                 )
               ) : (
                 <Navigate to="/" replace />

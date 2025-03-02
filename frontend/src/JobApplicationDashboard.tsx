@@ -191,7 +191,7 @@ const JobApplicationDashboard = () => {
                       strokeWidth={24}
                       isLoading={loading}
                     />
-                    <div className="absolute inset-0 flex items-center justify-center text-3xl font-semibold text-gray-100">
+                    <div className="absolute inset-0 flex items-center justify-center text-3xl font-semibold text-gray-100 comfortaa-300">
                       {stats.totalApplications}
                     </div>
                   </div>
@@ -199,7 +199,7 @@ const JobApplicationDashboard = () => {
                     Total Applications
                   </div>
                 </div>
-                <div className="flex flex-col items-center justify-center p-2 -mt-20">
+                <div className="flex flex-col items-center justify-center p-2 -mt-20 ">
                   <div className="relative mb-2">
                     <ConcentricProgressCircles
                       rings={multipleRings}
@@ -218,7 +218,7 @@ const JobApplicationDashboard = () => {
                       strokeWidth={15}
                       isLoading={loading}
                     />
-                    <div className="absolute inset-0 flex items-center justify-center text-3xl font-semibold text-gray-100">
+                    <div className="absolute inset-0 flex items-center justify-center text-3xl font-semibold text-gray-100 comfortaa-300">
                       {Math.round(stats.averageCompatibility)}
                     </div>
                   </div>
