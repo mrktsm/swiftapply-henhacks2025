@@ -233,10 +233,13 @@ const ProfileSetupForm = ({ onFormComplete }: FormPageProps) => {
     <div className="bg-gradient-to-br from-gray-900 to-gray-800 min-h-screen text-gray-200">
       {/* Header */}
       <header className="bg-gray-800 bg-opacity-70 backdrop-blur-md border-b border-gray-700 sticky top-0 z-10">
-        <div className="container mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="container mx-auto px-6 h-16 flex items-center justify-between font-thin text-2xl">
           <div className="flex justify-between">
-            <img src="red bird.svg" className="h-6 mr-2" />
-            <img src="red_tittle.png" className="h-7" />
+            <img src="red bird.svg" className="h-[32px] mr-2" />
+            <img
+              src="red_tittle.png"
+              className="h-[30px] mt-[2.5px] mr-2"
+            /> | <span className="mt-[1px] ml-2"> Profile Setup</span>
           </div>
 
           <button className="bg-gradient-to-r from-rose-600 to-red-500 hover:from-rose-500 hover:to-red-400 text-white rounded-full py-2 px-6 font-medium text-sm shadow-md hover:shadow-lg transition-all duration-200">

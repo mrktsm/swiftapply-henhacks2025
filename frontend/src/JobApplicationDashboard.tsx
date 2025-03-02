@@ -154,7 +154,7 @@ const JobApplicationDashboard = () => {
       {/* Header - iOS style navigation bar */}
       <header className="bg-gray-800 bg-opacity-70 backdrop-blur-md border-b border-gray-700 sticky top-0 z-10">
         <div className="container mx-auto px-6 h-16 flex items-center justify-between">
-          <h1 className="text-2xl font-medium bg-gradient-to-r text-white bg-clip-text font-thin">
+          <h1 className="text-2xl bg-gradient-to-r text-white bg-clip-text font-thin">
             <div className="flex justify-between">
               <img src="red bird.svg" className="h-[32px] mr-2" />
               <img
