@@ -431,37 +431,68 @@ const ProfileSetupForm = () => {
                   </label>
                   <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-600 border-dashed rounded-lg">
                     <div className="space-y-1 text-center">
-                      <Upload
-                        size={30}
-                        className="mx-auto h-8 w-8 text-gray-400"
-                      />
-                      <div className="flex text-sm text-gray-400">
-                        <label
-                          htmlFor="file-upload"
-                          className="relative cursor-pointer bg-gray-700 rounded-md font-medium text-rose-400 hover:text-rose-300 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-rose-500"
-                        >
-                          <span className="px-2">Upload a file</span>
-                          <input
-                            id="file-upload"
-                            name="file-upload"
-                            type="file"
-                            className="sr-only"
-                            required
-                            accept=".pdf,.doc,.docx"
-                            onChange={(e) =>
-                              handleInputChange(
-                                "basicInfo",
-                                "resumeFile",
-                                e.target.files?.[0] || null
-                              )
-                            }
-                          />
-                        </label>
-                        <p className="pl-1">or drag and drop</p>
+                      <div className="space-y-1 text-center">
+                        {formData.basicInfo.resumeFile ? (
+                          // Show this when file is uploaded
+                          <div className="flex flex-col items-center">
+                            <FileCheck
+                              size={30}
+                              className="mx-auto h-8 w-8 text-green-400"
+                            />
+                            <span className="text-sm text-gray-300 mt-2">
+                              {formData.basicInfo.resumeFile.name}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() =>
+                                handleInputChange(
+                                  "basicInfo",
+                                  "resumeFile",
+                                  null
+                                )
+                              }
+                              className="text-sm text-rose-400 hover:text-rose-300 mt-1"
+                            >
+                              Remove file
+                            </button>
+                          </div>
+                        ) : (
+                          // Show this when no file is uploaded
+                          <div>
+                            <Upload
+                              size={30}
+                              className="mx-auto h-8 w-8 text-gray-400"
+                            />
+                            <div className="flex text-sm text-gray-400">
+                              <label
+                                htmlFor="file-upload"
+                                className="relative cursor-pointer bg-gray-700 rounded-md font-medium text-rose-400 hover:text-rose-300 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-rose-500"
+                              >
+                                <span className="px-2">Upload a file</span>
+                                <input
+                                  id="file-upload"
+                                  name="file-upload"
+                                  type="file"
+                                  className="sr-only"
+                                  accept=".pdf,.doc,.docx"
+                                  onChange={(e) =>
+                                    handleInputChange(
+                                      "basicInfo",
+                                      "resumeFile",
+                                      e.target.files?.[0] || null
+                                    )
+                                  }
+                                  required
+                                />
+                              </label>
+                              <p className="pl-1">or drag and drop</p>
+                            </div>
+                            <p className="text-xs text-gray-400">
+                              PDF or DOC up to 5MB
+                            </p>
+                          </div>
+                        )}
                       </div>
-                      <p className="text-xs text-gray-400">
-                        PDF or DOC up to 5MB
-                      </p>
                     </div>
                   </div>
                 </div>
