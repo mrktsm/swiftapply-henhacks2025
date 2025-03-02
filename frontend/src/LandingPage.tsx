@@ -73,7 +73,7 @@ const LandingPage = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-rose-500/30 to-pink-600/30 rounded-2xl blur-xl opacity-70 -z-10"></div>
           <div className="bg-gray-900/40 backdrop-blur-sm border border-pink-500/20 rounded-2xl shadow-2xl overflow-hidden">
             <img
-              src="/api/placeholder/1000/600"
+              src="demo.png"
               alt="AI Job Application Dashboard"
               className="w-full h-auto"
             />
