@@ -106,7 +106,8 @@ const SignInPage = ({ onAuthSuccess }: SignInPageProps) => {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-rose-600 to-red-500 mb-4">
             <img src="white bird.svg" className="w-9 h-9 text-white" />
           </div>
-          <h1 className="text-3xl font-bold text-white">Job Dashboard</h1>
+          {/* <h1 className="text-3xl font-bold text-white">Job Dashboard</h1> */}
+          <img src="red_tittle.png" className="h-12" />
           <p className="text-gray-400 mt-2">
             Sign in to manage your applications
           </p>
