@@ -151,7 +151,6 @@ const JobApplicationDashboard = () => {
 
   return (
     <div className="bg-gradient-to-br from-gray-900 to-gray-800 min-h-screen text-gray-200">
-      {/* Header - iOS style navigation bar */}
       <header className="bg-gray-800 bg-opacity-70 backdrop-blur-md border-b border-gray-700 sticky top-0 z-10">
         <div className="container mx-auto px-6 h-16 flex items-center justify-between cursor-pointer">
           <h1 className="text-2xl bg-gradient-to-r text-white bg-clip-text font-thin">
@@ -214,7 +213,7 @@ const JobApplicationDashboard = () => {
                     />
                   </div>
                   <div className="text-gray-300 font-medium -mt-25">
-                    Interviews
+                    Job Type Breakdown
                   </div>
                 </div>
                 <div className="flex flex-col items-center justify-center">

@@ -139,12 +139,23 @@ const ProfileSetupForm = ({ onFormComplete }: FormPageProps) => {
     behavioral: false,
   });
   const [formData, setFormData] = useState<FormData>(initialFormData);
+  const [loading, setLoading] = useState(false);
 
   const toggleSection = (section) => {
     setExpanded((prev) => ({
       ...prev,
       [section]: !prev[section],
     }));
+  };
+
+  const handleClick = () => {
+    setLoading(true); // Start loading
+    setTimeout(() => {
+      console.log(formData);
+      onFormComplete();
+      handleSubmit();
+      setLoading(false); // End loading after 3 seconds
+    }, 3000); // Simulate a 3-second loader
   };
 
   const getStepClass = (step) => {
@@ -1320,20 +1331,21 @@ const ProfileSetupForm = ({ onFormComplete }: FormPageProps) => {
           </button>
 
           <button
-            className={`py-2 px-6 rounded-full font-medium transition-all duration-200 cursor-pointer
-            ${
-              currentStep < 7
-                ? "bg-gradient-to-r from-rose-600 to-red-500 hover:from-rose-500 hover:to-red-400 text-white"
-                : "bg-gray-800 text-gray-500 cursor-not-allowed"
-            }`}
-            onClick={() => {
-              console.log(formData);
-              onFormComplete();
-              handleSubmit();
-            }}
-            disabled={currentStep === 7}
+            onClick={handleClick}
+            disabled={currentStep === 7 || loading} // Disable if loading or current step is 7
+            className="bg-gradient-to-r from-rose-600 to-pink-500 text-white rounded-full py-3 px-8 font-medium text-lg shadow-lg hover:shadow-xl transition-all duration-200 cursor-pointer"
           >
-            Next
+            {loading ? (
+              <div className="flex items-center justify-center space-x-2">
+                <div className="relative flex items-center justify-center w-8 h-8">
+                  <div className="absolute w-8 h-8 border-4 border-t-4 border-gray-200 border-t-rose-500 rounded-full animate-spin"></div>
+                  <div className="absolute w-4 h-4 bg-rose-500 rounded-full animate-ping"></div>
+                </div>
+                <span>Loading...</span>
+              </div>
+            ) : (
+              "Continue to Dashboard"
+            )}
           </button>
         </div>
       </div>
