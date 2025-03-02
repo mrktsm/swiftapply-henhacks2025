@@ -26,7 +26,8 @@ class JobAgent:
                 task=(
                     "Go to jobright.ai, sign in using google, whenever prompted by website to "
                     "check if human, wait a few seconds and press the checkbox, "
-                    "Sort jobs by top matched instead of recommended by pressing the 'recommended' drop down button, "
+                    "Sort jobs by top matched instead of recommended by pressing the 'recommended' drop down button on "
+                    "on the top right of the page. Once the dropdown opens, press 'Top Matched' "
                     "apply to the first job you see using userinfo. Go through the whole application process " 
                     "upload a resume when you see a file upload button. "
                     "Once you have applied to the job, go back to jobright.ai tab and press 'Yes, I applied' button"        
