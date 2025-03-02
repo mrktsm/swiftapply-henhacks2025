@@ -2,6 +2,7 @@ browser-automation-api/.env
 # Specific large files to ignore
 browser-automation-api/src/dist/SwiftApply.exe
 browser-automation-api/src/build/SwiftApply/SwiftApply.pkg
+browser-automation-api/src/default_user_data.json
 *.exe
 *.pkg
 *.dmg
