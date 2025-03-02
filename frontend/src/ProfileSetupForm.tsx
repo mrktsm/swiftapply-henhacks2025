@@ -234,7 +234,11 @@ const ProfileSetupForm = ({ onFormComplete }: FormPageProps) => {
       {/* Header */}
       <header className="bg-gray-800 bg-opacity-70 backdrop-blur-md border-b border-gray-700 sticky top-0 z-10">
         <div className="container mx-auto px-6 h-16 flex items-center justify-between">
-          <h1 className="text-2xl font-medium text-white">Profile Setup</h1>
+          <div className="flex justify-between">
+            <img src="red bird.svg" className="h-6 mr-2" />
+            <img src="red_tittle.png" className="h-7" />
+          </div>
+
           <button className="bg-gradient-to-r from-rose-600 to-red-500 hover:from-rose-500 hover:to-red-400 text-white rounded-full py-2 px-6 font-medium text-sm shadow-md hover:shadow-lg transition-all duration-200">
             Save Profile
           </button>
