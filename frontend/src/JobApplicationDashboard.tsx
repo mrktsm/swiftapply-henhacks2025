@@ -84,7 +84,7 @@ const JobApplicationDashboard = () => {
     { name: "Sun", count: 5 },
   ];
 
-  // Light green-inspired color palette
+  // Dark mode color palette
   const COLORS = [
     "#4ade80", // light green (primary)
     "#34C759", // green
@@ -144,25 +144,19 @@ const JobApplicationDashboard = () => {
   };
 
   return (
-    <div
-      className="bg-white-50 min-h-screen"
-      //   style={{
-      //     fontFamily:
-      //       "SF Pro Display, -apple-system, BlinkMacSystemFont, sans-serif",
-      //   }}
-    >
+    <div className="bg-gray-900 min-h-screen text-gray-200">
       {/* Header - iOS style navigation bar */}
-      <header className="bg-opacity-70 backdrop-blur-md border-b border-gray-100 sticky top-0 z-10 bg-gray-50">
+      <header className="bg-gray-800 bg-opacity-70 backdrop-blur-md border-b border-gray-700 sticky top-0 z-10">
         <div className="container mx-auto px-6 h-16 flex items-center justify-between">
-          <h1 className="text-2xl font-medium bg-gradient-to-r text-black bg-clip-text">
+          <h1 className="text-2xl font-medium bg-gradient-to-r text-white bg-clip-text">
             Job Tracker
           </h1>
 
           <div className="flex items-center space-x-4">
-            <button className="p-2 rounded-full text-gray-500 hover:bg-gray-100 transition-colors">
+            <button className="p-2 rounded-full text-gray-300 hover:bg-gray-700 transition-colors">
               <Search size={20} />
             </button>
-            <button className="p-2 rounded-full text-gray-500 hover:bg-gray-100 transition-colors">
+            <button className="p-2 rounded-full text-gray-300 hover:bg-gray-700 transition-colors">
               <Bell size={20} />
             </button>
             <button className="bg-gradient-to-r from-rose-600 to-red-500 hover:from-rose-500 hover:to-red-400 text-white rounded-full py-2 px-6 font-medium text-sm shadow-md hover:shadow-lg transition-all duration-200">
@@ -175,10 +169,10 @@ const JobApplicationDashboard = () => {
       <div className="container mx-auto px-6 py-4">
         {/* Dashboard Stats */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-          <div className="rounded-xl shadow-sm border border-gray-100 overflow-hidden col-span-2 transform transition-transform hover:scale-[1.01] duration-300">
+          <div className="rounded-xl shadow-sm border border-gray-700 overflow-hidden col-span-2 transform transition-transform duration-300 bg-gray-800">
             <div className="p-6">
               <div className="mb-6">
-                <h2 className="text-xl font-medium text-gray-800 text-left">
+                <h2 className="text-xl font-medium text-gray-100 text-left">
                   Application Overview
                 </h2>
               </div>
@@ -191,11 +185,11 @@ const JobApplicationDashboard = () => {
                       strokeWidth={24}
                       isLoading={loading}
                     />
-                    <div className="absolute inset-0 flex items-center justify-center text-3xl font-semibold text-gray-800">
+                    <div className="absolute inset-0 flex items-center justify-center text-3xl font-semibold text-gray-100">
                       {stats.totalApplications}
                     </div>
                   </div>
-                  <div className="text-gray-500 font-medium mt-2">
+                  <div className="text-gray-300 font-medium mt-2">
                     Total Applications
                   </div>
                 </div>
@@ -205,11 +199,8 @@ const JobApplicationDashboard = () => {
                       rings={multipleRings}
                       showLabels={false}
                     />
-                    {/* <div className="absolute inset-0 flex items-center justify-center text-2xl font-semibold text-gray-800">
-                {stats.interviews}
-              </div> */}
                   </div>
-                  <div className="text-gray-500 font-medium -mt-25">
+                  <div className="text-gray-300 font-medium -mt-25">
                     Interviews
                   </div>
                 </div>
@@ -221,19 +212,19 @@ const JobApplicationDashboard = () => {
                       strokeWidth={15}
                       isLoading={loading}
                     />
-                    <div className="absolute inset-0 flex items-center justify-center text-3xl font-semibold text-gray-800">
+                    <div className="absolute inset-0 flex items-center justify-center text-3xl font-semibold text-gray-100">
                       {Math.round(stats.averageCompatibility)}
                     </div>
                   </div>
-                  <div className="text-gray-500 font-medium">
+                  <div className="text-gray-300 font-medium">
                     Avg. Compatibility
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 transform transition-transform hover:scale-[1.01] duration-300 text-left h-full">
-            <h2 className="text-xl font-medium mb-6 text-gray-800">
+          <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6 transform transition-transform duration-300 text-left h-full">
+            <h2 className="text-xl font-medium mb-6 text-gray-100">
               Daily Applications
             </h2>
             <div className="h-[calc(100%-4rem)]">
@@ -250,20 +241,8 @@ const JobApplicationDashboard = () => {
                       x2="0"
                       y2="1"
                     >
-                      <stop offset="0%" stopColor="#ff0f7b" stopOpacity={1} />{" "}
-                      {/* Vibrant pink */}
-                      <stop
-                        offset="50%"
-                        stopColor="#f89b9b"
-                        stopOpacity={1}
-                      />{" "}
-                      {/* Mid-tone */}
-                      <stop
-                        offset="100%"
-                        stopColor="#ff3366"
-                        stopOpacity={1}
-                      />{" "}
-                      {/* Deep rose */}
+                      <stop offset="0%" stopColor="#FF0066" stopOpacity={1} />
+                      <stop offset="100%" stopColor="#FF0033" stopOpacity={1} />
                     </linearGradient>
                   </defs>
                   <XAxis
@@ -271,15 +250,21 @@ const JobApplicationDashboard = () => {
                     axisLine={false}
                     tickLine={false}
                     dy={10}
+                    tick={{ fill: "#b3b3b3" }}
                   />
-                  <YAxis axisLine={false} tickLine={false} dx={-10} />
+                  <YAxis
+                    axisLine={false}
+                    tickLine={false}
+                    dx={-10}
+                    tick={{ fill: "#b3b3b3" }}
+                  />
                   <Tooltip
                     contentStyle={{
                       borderRadius: "8px",
-                      backgroundColor: "rgba(255, 255, 255, 0.8)",
-                      backdropFilter: "blur(8px)",
+                      backgroundColor: "#2d3748", // Dark background for tooltip
                       border: "none",
-                      boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+                      boxShadow: "0 4px 12px rgba(0, 0, 0, 0.3)",
+                      color: "#e2e8f0",
                     }}
                   />
                   <Bar
@@ -292,10 +277,7 @@ const JobApplicationDashboard = () => {
                     animationEasing="ease-out"
                   >
                     {applicationData.map((entry, index) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fillOpacity={0.95} // Increased opacity for more vibrant colors
-                      />
+                      <Cell key={`cell-${index}`} fillOpacity={1} />
                     ))}
                   </Bar>
                 </BarChart>
@@ -306,13 +288,13 @@ const JobApplicationDashboard = () => {
 
         {/* Applied Jobs */}
         <div className="mb-6 flex justify-between items-center">
-          <h2 className="text-xl font-semibold text-gray-800">Applied Jobs</h2>
+          <h2 className="text-xl font-semibold text-gray-100">Applied Jobs</h2>
           <div className="flex items-center">
-            <button className="text-gray-500 hover:text-gray-700 flex items-center mr-4 py-2 px-4 rounded-full hover:bg-white transition-colors">
+            <button className="text-gray-300 hover:text-gray-100 flex items-center mr-4 py-2 px-4 rounded-full hover:bg-gray-800 transition-colors">
               <Filter size={16} className="mr-2" />
               <span>Filter</span>
             </button>
-            <button className="text-gray-500 hover:text-gray-700 flex items-center">
+            <button className="text-gray-300 hover:text-gray-100 flex items-center">
               <Calendar size={16} className="mr-2" />
               <span>Sort by Date</span>
             </button>
@@ -323,9 +305,9 @@ const JobApplicationDashboard = () => {
           {appliedJobs.map((job) => (
             <div
               key={job.id}
-              className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 flex"
+              className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-4 flex"
             >
-              <div className="w-16 h-16 rounded-lg bg-gray-100 flex items-center justify-center text-xl font-bold text-gray-500 mr-4">
+              <div className="w-16 h-16 rounded-lg bg-gray-700 flex items-center justify-center text-xl font-bold text-gray-300 mr-4">
                 {job.company.slice(0, 1)}
               </div>
 
@@ -333,8 +315,10 @@ const JobApplicationDashboard = () => {
                 <div className="flex justify-between items-start">
                   <div>
                     <span className="text-xs text-gray-400">{job.posted}</span>
-                    <h3 className="text-lg font-semibold">{job.title}</h3>
-                    <div className="flex items-center text-sm text-gray-500">
+                    <h3 className="text-lg font-semibold text-gray-100">
+                      {job.title}
+                    </h3>
+                    <div className="flex items-center text-sm text-gray-400">
                       <span>{job.company}</span>
                       <span className="mx-1">•</span>
                       <span>B2B • Big Data • Late Stage</span>
@@ -352,15 +336,15 @@ const JobApplicationDashboard = () => {
                 </div>
 
                 <div className="grid grid-cols-3 gap-4 mt-4">
-                  <div className="flex items-center text-sm text-gray-500">
+                  <div className="flex items-center text-sm text-gray-400">
                     <MapPin size={16} className="mr-2" />
                     <span>{job.location}</span>
                   </div>
-                  <div className="flex items-center text-sm text-gray-500">
+                  <div className="flex items-center text-sm text-gray-400">
                     <Clock size={16} className="mr-2" />
                     <span>{job.type}</span>
                   </div>
-                  <div className="flex items-center text-sm text-gray-500">
+                  <div className="flex items-center text-sm text-gray-400">
                     <DollarSign size={16} className="mr-2" />
                     <span>{job.salary}</span>
                   </div>
@@ -372,19 +356,19 @@ const JobApplicationDashboard = () => {
                     <ProgressCircle
                       percentage={job.compatibility}
                       radius={20}
-                      strokeWidth={4}
+                      strokeWidth={6}
                       isLoading={loading}
                     />
                   </div>
                   <div>
-                    <div className="text-sm font-medium mb-2">
+                    <div className="text-sm font-medium mb-2 text-gray-200">
                       Match Factors
                     </div>
                     <div className="flex gap-2">
                       {job.tags.map((tag, i) => (
                         <div
                           key={i}
-                          className="bg-red-100 text-rose-700 px-2 py-1 rounded-full text-xs"
+                          className="bg-red-900 text-rose-200 px-2 py-1 rounded-full text-xs"
                         >
                           {tag}
                         </div>
