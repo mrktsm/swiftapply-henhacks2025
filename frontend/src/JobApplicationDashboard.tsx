@@ -144,7 +144,7 @@ const JobApplicationDashboard = () => {
   };
 
   return (
-    <div className="bg-gray-900 min-h-screen text-gray-200">
+    <div className="bg-gradient-to-br from-gray-900 to-gray-700 min-h-screen text-gray-200">
       {/* Header - iOS style navigation bar */}
       <header className="bg-gray-800 bg-opacity-70 backdrop-blur-md border-b border-gray-700 sticky top-0 z-10">
         <div className="container mx-auto px-6 h-16 flex items-center justify-between">
