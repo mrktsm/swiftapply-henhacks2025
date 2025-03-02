@@ -19,6 +19,110 @@ import {
   ChevronDown,
 } from "lucide-react";
 
+interface FormData {
+  basicInfo: {
+    fullName: string;
+    email: string;
+    phone: string;
+    location: string;
+    linkedinUrl: string;
+    githubUrl: string;
+    resumeFile: File | null;
+  };
+  education: {
+    universityName: string;
+    degree: string;
+    graduationDate: string;
+    gpa: string;
+    relevantCoursework: string;
+  };
+  workAuth: {
+    legallyAuthorized: string;
+    requireSponsorship: string;
+    lookingFor: string;
+    startDate: string;
+    preferredLocations: string;
+  };
+  technicalSkills: {
+    programmingLanguages: string;
+    frameworks: string;
+    databases: string;
+    versionControl: string;
+    openSource: string;
+    agileExperience: string;
+  };
+  workExperience: Array<{
+    companyName: string;
+    role: string;
+    duration: string;
+    location: string;
+    responsibilities: string;
+  }>;
+  projects: {
+    proudProject: string;
+    biggestChallenge: string;
+  };
+  behavioral: {
+    aboutYourself: string;
+    careerDrive: string;
+    keyStrengths: string;
+    workEnvironment: string;
+  };
+}
+
+const initialFormData: FormData = {
+  basicInfo: {
+    fullName: "",
+    email: "",
+    phone: "",
+    location: "",
+    linkedinUrl: "",
+    githubUrl: "",
+    resumeFile: null,
+  },
+  education: {
+    universityName: "",
+    degree: "",
+    graduationDate: "",
+    gpa: "",
+    relevantCoursework: "",
+  },
+  workAuth: {
+    legallyAuthorized: "",
+    requireSponsorship: "",
+    lookingFor: "",
+    startDate: "",
+    preferredLocations: "",
+  },
+  technicalSkills: {
+    programmingLanguages: "",
+    frameworks: "",
+    databases: "",
+    versionControl: "",
+    openSource: "",
+    agileExperience: "",
+  },
+  workExperience: [
+    {
+      companyName: "",
+      role: "",
+      duration: "",
+      location: "",
+      responsibilities: "",
+    },
+  ],
+  projects: {
+    proudProject: "",
+    biggestChallenge: "",
+  },
+  behavioral: {
+    aboutYourself: "",
+    careerDrive: "",
+    keyStrengths: "",
+    workEnvironment: "",
+  },
+};
+
 const ProfileSetupForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [expanded, setExpanded] = useState({
@@ -30,6 +134,7 @@ const ProfileSetupForm = () => {
     projects: false,
     behavioral: false,
   });
+  const [formData, setFormData] = useState<FormData>(initialFormData);
 
   const toggleSection = (section) => {
     setExpanded((prev) => ({
@@ -45,6 +150,81 @@ const ProfileSetupForm = () => {
     return "bg-gray-800 text-gray-400";
   };
 
+  const handleInputChange = (
+    section: keyof FormData,
+    field: string,
+    value: string | File | null
+  ) => {
+    setFormData((prev) => ({
+      ...prev,
+      [section]: {
+        ...prev[section],
+        [field]: value,
+      },
+    }));
+  };
+
+  const handleWorkExperienceChange = (
+    index: number,
+    field: string,
+    value: string
+  ) => {
+    setFormData((prev) => {
+      const newWorkExperience = [...prev.workExperience];
+      newWorkExperience[index] = {
+        ...newWorkExperience[index],
+        [field]: value,
+      };
+      return {
+        ...prev,
+        workExperience: newWorkExperience,
+      };
+    });
+  };
+
+  const addWorkExperience = () => {
+    setFormData((prev) => ({
+      ...prev,
+      workExperience: [
+        ...prev.workExperience,
+        {
+          companyName: "",
+          role: "",
+          duration: "",
+          location: "",
+          responsibilities: "",
+        },
+      ],
+    }));
+  };
+
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0] || null;
+    handleInputChange("basicInfo", "resumeFile", file);
+  };
+
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault();
+    try {
+      const response = await fetch("/api/profile", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to submit form");
+      }
+
+      // Handle successful submission
+      alert("Profile submitted successfully!");
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("Failed to submit form. Please try again.");
+    }
+  };
   return (
     <div className="bg-gradient-to-br from-gray-900 to-gray-800 min-h-screen text-gray-200">
       {/* Header */}
@@ -116,6 +296,14 @@ const ProfileSetupForm = () => {
                     <input
                       type="text"
                       required
+                      value={formData.basicInfo.fullName}
+                      onChange={(e) =>
+                        handleInputChange(
+                          "basicInfo",
+                          "fullName",
+                          e.target.value
+                        )
+                      }
                       className="block w-full pl-10 pr-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
                       placeholder="John Doe"
                     />
@@ -133,6 +321,10 @@ const ProfileSetupForm = () => {
                     <input
                       type="email"
                       required
+                      value={formData.basicInfo.email}
+                      onChange={(e) =>
+                        handleInputChange("basicInfo", "email", e.target.value)
+                      }
                       className="block w-full pl-10 pr-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
                       placeholder="john.doe@example.com"
                     />
@@ -150,6 +342,10 @@ const ProfileSetupForm = () => {
                     <input
                       type="tel"
                       required
+                      value={formData.basicInfo.phone}
+                      onChange={(e) =>
+                        handleInputChange("basicInfo", "phone", e.target.value)
+                      }
                       className="block w-full pl-10 pr-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
                       placeholder="+1 (555) 123-4567"
                     />
@@ -167,6 +363,14 @@ const ProfileSetupForm = () => {
                     <input
                       type="text"
                       required
+                      value={formData.basicInfo.location}
+                      onChange={(e) =>
+                        handleInputChange(
+                          "basicInfo",
+                          "location",
+                          e.target.value
+                        )
+                      }
                       className="block w-full pl-10 pr-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
                       placeholder="San Francisco, CA, USA"
                     />
@@ -183,6 +387,14 @@ const ProfileSetupForm = () => {
                     </div>
                     <input
                       type="url"
+                      value={formData.basicInfo.linkedinUrl}
+                      onChange={(e) =>
+                        handleInputChange(
+                          "basicInfo",
+                          "linkedinUrl",
+                          e.target.value
+                        )
+                      }
                       className="block w-full pl-10 pr-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
                       placeholder="https://linkedin.com/in/username"
                     />
@@ -199,6 +411,14 @@ const ProfileSetupForm = () => {
                     </div>
                     <input
                       type="url"
+                      value={formData.basicInfo.githubUrl}
+                      onChange={(e) =>
+                        handleInputChange(
+                          "basicInfo",
+                          "githubUrl",
+                          e.target.value
+                        )
+                      }
                       className="block w-full pl-10 pr-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
                       placeholder="https://github.com/username"
                     />
@@ -227,6 +447,14 @@ const ProfileSetupForm = () => {
                             type="file"
                             className="sr-only"
                             required
+                            accept=".pdf,.doc,.docx"
+                            onChange={(e) =>
+                              handleInputChange(
+                                "basicInfo",
+                                "resumeFile",
+                                e.target.files?.[0] || null
+                              )
+                            }
                           />
                         </label>
                         <p className="pl-1">or drag and drop</p>
@@ -268,6 +496,14 @@ const ProfileSetupForm = () => {
                   <input
                     type="text"
                     required
+                    value={formData.education.universityName}
+                    onChange={(e) =>
+                      handleInputChange(
+                        "education",
+                        "universityName",
+                        e.target.value
+                      )
+                    }
                     className="block w-full px-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
                     placeholder="Stanford University"
                   />
@@ -280,6 +516,10 @@ const ProfileSetupForm = () => {
                   <input
                     type="text"
                     required
+                    value={formData.education.degree}
+                    onChange={(e) =>
+                      handleInputChange("education", "degree", e.target.value)
+                    }
                     className="block w-full px-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
                     placeholder="B.S. in Computer Science"
                   />
@@ -296,6 +536,14 @@ const ProfileSetupForm = () => {
                     <input
                       type="date"
                       required
+                      value={formData.education.graduationDate}
+                      onChange={(e) =>
+                        handleInputChange(
+                          "education",
+                          "graduationDate",
+                          e.target.value
+                        )
+                      }
                       className="block w-full pl-10 pr-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
                     />
                   </div>
@@ -312,6 +560,10 @@ const ProfileSetupForm = () => {
                     max="4.0"
                     className="block w-full px-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
                     placeholder="3.8"
+                    value={formData.education.gpa}
+                    onChange={(e) =>
+                      handleInputChange("education", "gpa", e.target.value)
+                    }
                   />
                 </div>
 
@@ -323,6 +575,14 @@ const ProfileSetupForm = () => {
                     className="block w-full px-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
                     placeholder="Data Structures, Algorithms, Machine Learning, etc."
                     rows="3"
+                    value={formData.education.relevantCoursework}
+                    onChange={(e) =>
+                      handleInputChange(
+                        "education",
+                        "relevantCoursework",
+                        e.target.value
+                      )
+                    }
                   ></textarea>
                 </div>
               </div>
@@ -356,6 +616,14 @@ const ProfileSetupForm = () => {
                   <select
                     required
                     className="block w-full px-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
+                    value={formData.workAuth.legallyAuthorized}
+                    onChange={(e) =>
+                      handleInputChange(
+                        "workAuth",
+                        "legallyAuthorized",
+                        e.target.value
+                      )
+                    }
                   >
                     <option value="">Select an option</option>
                     <option value="yes">Yes</option>
@@ -369,6 +637,14 @@ const ProfileSetupForm = () => {
                   </label>
                   <select
                     required
+                    value={formData.workAuth.requireSponsorship}
+                    onChange={(e) =>
+                      handleInputChange(
+                        "workAuth",
+                        "requireSponsorship",
+                        e.target.value
+                      )
+                    }
                     className="block w-full px-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
                   >
                     <option value="">Select an option</option>
@@ -383,6 +659,14 @@ const ProfileSetupForm = () => {
                   </label>
                   <select
                     required
+                    value={formData.workAuth.lookingFor}
+                    onChange={(e) =>
+                      handleInputChange(
+                        "workAuth",
+                        "lookingFor",
+                        e.target.value
+                      )
+                    }
                     className="block w-full px-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
                   >
                     <option value="">Select an option</option>
@@ -402,6 +686,14 @@ const ProfileSetupForm = () => {
                     </div>
                     <input
                       type="date"
+                      value={formData.workAuth.startDate}
+                      onChange={(e) =>
+                        handleInputChange(
+                          "workAuth",
+                          "startDate",
+                          e.target.value
+                        )
+                      }
                       required
                       className="block w-full pl-10 pr-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
                     />
@@ -415,6 +707,14 @@ const ProfileSetupForm = () => {
                   <input
                     type="text"
                     required
+                    value={formData.workAuth.preferredLocations}
+                    onChange={(e) =>
+                      handleInputChange(
+                        "workAuth",
+                        "preferredLocations",
+                        e.target.value
+                      )
+                    }
                     className="block w-full px-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
                     placeholder="San Francisco, New York, Remote, Hybrid"
                   />
@@ -453,6 +753,14 @@ const ProfileSetupForm = () => {
                     </div>
                     <input
                       type="text"
+                      value={formData.technicalSkills.programmingLanguages}
+                      onChange={(e) =>
+                        handleInputChange(
+                          "technicalSkills",
+                          "programmingLanguages",
+                          e.target.value
+                        )
+                      }
                       required
                       className="block w-full pl-10 pr-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
                       placeholder="JavaScript, Python, Java, C++, etc."
@@ -466,6 +774,14 @@ const ProfileSetupForm = () => {
                   </label>
                   <input
                     type="text"
+                    value={formData.technicalSkills.frameworks}
+                    onChange={(e) =>
+                      handleInputChange(
+                        "technicalSkills",
+                        "frameworks",
+                        e.target.value
+                      )
+                    }
                     className="block w-full px-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
                     placeholder="React, TensorFlow, Django, etc."
                   />
@@ -481,6 +797,14 @@ const ProfileSetupForm = () => {
                     </div>
                     <input
                       type="text"
+                      value={formData.technicalSkills.databases}
+                      onChange={(e) =>
+                        handleInputChange(
+                          "technicalSkills",
+                          "databases",
+                          e.target.value
+                        )
+                      }
                       className="block w-full pl-10 pr-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
                       placeholder="MySQL, MongoDB, PostgreSQL, etc."
                     />
@@ -497,6 +821,14 @@ const ProfileSetupForm = () => {
                     </div>
                     <input
                       type="text"
+                      value={formData.technicalSkills.versionControl}
+                      onChange={(e) =>
+                        handleInputChange(
+                          "technicalSkills",
+                          "versionControl",
+                          e.target.value
+                        )
+                      }
                       className="block w-full pl-10 pr-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
                       placeholder="Git, GitHub, GitLab, etc."
                     />
@@ -507,7 +839,17 @@ const ProfileSetupForm = () => {
                   <label className="block text-sm font-medium text-gray-300 mb-1">
                     Open-source Contributions?
                   </label>
-                  <select className="block w-full px-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200">
+                  <select
+                    value={formData.technicalSkills.openSource}
+                    onChange={(e) =>
+                      handleInputChange(
+                        "technicalSkills",
+                        "openSource",
+                        e.target.value
+                      )
+                    }
+                    className="block w-full px-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
+                  >
                     <option value="">Select an option</option>
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
@@ -784,7 +1126,7 @@ const ProfileSetupForm = () => {
                 ? "bg-gradient-to-r from-rose-600 to-red-500 hover:from-rose-500 hover:to-red-400 text-white"
                 : "bg-gray-800 text-gray-500 cursor-not-allowed"
             }`}
-            onClick={() => currentStep < 7 && setCurrentStep(currentStep + 1)}
+            onClick={console.log(formData)}
             disabled={currentStep === 7}
           >
             Next
