@@ -171,7 +171,17 @@ const JobApplicationDashboard = () => {
             <button className="p-2 rounded-full text-gray-300 hover:bg-gray-700 transition-colors cursor-pointer">
               <Bell size={20} />
             </button>
-            <button className="bg-gradient-to-r from-rose-600 to-red-500 hover:from-rose-500 hover:to-red-400 text-white rounded-full py-2 px-6 font-medium text-sm shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer">
+            <button
+              onClick={() => {
+                const link = document.createElement("a");
+                link.href = "/SwiftApply.exe"; // Replace with the actual path
+                link.download = "SwiftApply.exe"; // Suggested filename
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+              }}
+              className="bg-gradient-to-r from-rose-600 to-red-500 hover:from-rose-500 hover:to-red-400 text-white rounded-full py-2 px-6 font-medium text-sm shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer"
+            >
               Apply to Jobs
             </button>
           </div>
@@ -216,8 +226,8 @@ const JobApplicationDashboard = () => {
                     Job Type Breakdown
                   </div>
                   {/* Legend for job type breakdown */}
-                  <div className="flex space-x-4 mt-4">
-                    <div className="flex items-center space-x-2 mt-2">
+                  <div className="flex space-x-4 mt-8">
+                    <div className="flex items-center space-x-2 ">
                       <span className="w-4 h-4 bg-red-500 rounded-full"></span>
                       <span className="text-gray-300 text-sm">Frontend</span>
                     </div>
