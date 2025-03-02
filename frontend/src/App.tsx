@@ -34,7 +34,9 @@ function App() {
     //     </Routes>
     //   </div>
     // </BrowserRouter>
-    <FormPage />
+    <div className="monteserrat-500">
+      <FormPage />
+    </div>
   );
 }
 

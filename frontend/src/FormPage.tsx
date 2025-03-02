@@ -57,9 +57,9 @@ const ProfileSetupForm = () => {
         </div>
       </header>
 
-      <div className="container mx-auto px-6 py-6">
+      <div className="container mx-auto px-6 py-6 justify-center items-center">
         {/* Progress Steps */}
-        <div className="flex justify-between mb-8 relative">
+        {/* <div className="flex justify-between mb-8 relative">
           <div className="absolute top-1/2 h-1 bg-gray-700 w-full -z-10 transform -translate-y-1/2"></div>
           {[1, 2, 3, 4, 5, 6, 7].map((step) => (
             <button
@@ -72,6 +72,16 @@ const ProfileSetupForm = () => {
               {step}
             </button>
           ))}
+        </div> */}
+
+        <div className="w-full py-12 flex flex-col items-center justify-center text-center">
+          <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-rose-500 to-red-400 mb-4">
+            Tell Us About Your Journey
+          </h1>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            The last form you'll ever fill—let our AI agent match you with the
+            perfect opportunities.
+          </p>
         </div>
 
         <div className="bg-gray-800 rounded-xl shadow-lg border border-gray-700 p-6 mb-6">
@@ -685,9 +695,9 @@ const ProfileSetupForm = () => {
             </div>
 
             {expanded.behavioral && (
-              <div className="mt-4 space-y-6">
+              <div className="-mt-6 space-y-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-1">
+                  <label className="block text- text-gray-300 mb-1">
                     Tell us about yourself*
                   </label>
                   <p className="text-xs text-gray-400 mb-2">
