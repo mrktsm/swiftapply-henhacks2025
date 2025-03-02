@@ -4,12 +4,12 @@ import { Search, Bell, ChevronRight } from "lucide-react";
 const LandingPage = () => {
   return (
     <div className="min-h-screen text-gray-200 relative">
-      {/* Complex gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-rose-900 via-red-800 to-pink-900 -z-10"></div>
+      {/* Complex gradient background - balanced pink and red */}
+      <div className="absolute inset-0 bg-gradient-to-br from-pink-400 via-red-400 to-red-500 -z-10"></div>
 
-      {/* Radial overlay for more complexity */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,0,120,0.3),transparent_70%)] -z-10"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(220,38,38,0.4),transparent_70%)] -z-10"></div>
+      {/* Radial overlay for more complexity - subtle pink and red mix */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,99,132,0.4),transparent_70%)] -z-10"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(255,64,129,0.45),transparent_70%)] -z-10"></div>
 
       {/* Noise texture overlay */}
       <div className="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg viewBox=%270 0 200 200%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27noiseFilter%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.65%27 numOctaves=%273%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23noiseFilter)%27/%3E%3C/svg%3E')] -z-10"></div>
@@ -40,7 +40,7 @@ const LandingPage = () => {
             <button className="p-2 rounded-full text-pink-100 hover:bg-pink-900/30 transition-colors">
               <Bell size={20} />
             </button>
-            <button className="bg-gradient-to-r from-rose-600 to-pink-500 hover:from-rose-500 hover:to-pink-400 text-white rounded-full py-2 px-6 font-medium text-sm shadow-md hover:shadow-lg transition-all duration-200">
+            <button className="bg-gradient-to-r from-rose-600 to-pink-500 hover:from-rose-500 hover:to-pink-400 text-white rounded-full py-2 px-6 font-medium text-sm shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer">
               Sign Up For Free
             </button>
           </div>
@@ -59,10 +59,10 @@ const LandingPage = () => {
             focus on what matters most.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
-            <button className="bg-gradient-to-r from-rose-600 to-pink-500 hover:from-rose-500 hover:to-pink-400 text-white rounded-full py-3 px-8 font-medium text-lg shadow-lg hover:shadow-xl transition-all duration-200">
+            <button className="bg-gradient-to-r from-rose-600 to-pink-500 hover:from-rose-500 hover:to-pink-400 text-white rounded-full py-3 px-8 font-medium text-lg shadow-lg hover:shadow-xl transition-all duration-200 cursor-pointer">
               Save Time Now
             </button>
-            <button className="bg-gray-900/30 backdrop-blur-sm border border-pink-500/30 hover:bg-pink-900/30 text-white rounded-full py-3 px-8 font-medium text-lg shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center">
+            <button className="bg-gray-900/30 backdrop-blur-sm border border-pink-500/30 hover:bg-pink-900/30 text-white rounded-full py-3 px-8 font-medium text-lg shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center cursor-pointer">
               See How It Works <ChevronRight size={20} className="ml-1" />
             </button>
           </div>
