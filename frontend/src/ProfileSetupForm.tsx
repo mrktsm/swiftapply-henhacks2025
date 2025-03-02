@@ -207,28 +207,55 @@ const ProfileSetupForm = ({ onFormComplete }: FormPageProps) => {
     handleInputChange("basicInfo", "resumeFile", file);
   };
 
-  const handleSubmit = async (event: FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+
+    const email = formData.basicInfo.email; // Extract email from formData
+    if (!email) {
+      console.error("Email is required to submit the form.");
+      return;
+    }
+
+    // Create FormData object
+    const formDataToSend = new FormData();
+
+    // Append all fields from formData
+    Object.entries(formData).forEach(([sectionKey, sectionValue]) => {
+      if (typeof sectionValue === "object" && sectionValue !== null) {
+        Object.entries(sectionValue).forEach(([key, value]) => {
+          if (value !== null) {
+            formDataToSend.append(
+              `${sectionKey}.${key}`,
+              value as string | Blob
+            );
+          }
+        });
+      }
+    });
+
+    // Append the resume file if it exists
+    if (formData.basicInfo.resumeFile) {
+      formDataToSend.append("resumeFile", formData.basicInfo.resumeFile);
+    }
+
     try {
-      const response = await fetch("/api/profile", {
+      const response = await fetch(`http://localhost:8081/${email}/apply`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+        body: formDataToSend, // No need to manually set Content-Type
       });
 
       if (!response.ok) {
-        throw new Error("Failed to submit form");
+        throw new Error("Submission failed");
       }
 
-      // Handle successful submission
-      alert("Profile submitted successfully!");
+      const result = await response.json();
+      console.log("Success:", result);
+      onFormComplete();
     } catch (error) {
-      console.error("Error submitting form:", error);
-      alert("Failed to submit form. Please try again.");
+      console.error("Error:", error);
     }
   };
+
   return (
     <div className="bg-gradient-to-br from-gray-900 to-gray-800 min-h-screen text-gray-200">
       {/* Header */}
@@ -1293,7 +1320,7 @@ const ProfileSetupForm = ({ onFormComplete }: FormPageProps) => {
           </button>
 
           <button
-            className={`py-2 px-6 rounded-full font-medium transition-all duration-200
+            className={`py-2 px-6 rounded-full font-medium transition-all duration-200 cursor-pointer
             ${
               currentStep < 7
                 ? "bg-gradient-to-r from-rose-600 to-red-500 hover:from-rose-500 hover:to-red-400 text-white"
@@ -1302,6 +1329,7 @@ const ProfileSetupForm = ({ onFormComplete }: FormPageProps) => {
             onClick={() => {
               console.log(formData);
               onFormComplete();
+              handleSubmit();
             }}
             disabled={currentStep === 7}
           >
