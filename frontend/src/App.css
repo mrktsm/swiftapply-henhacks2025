@@ -216,8 +216,9 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-gradient-to-br from-gray-900 to-gray-800 min-h-screen text-foreground;
   }
 }
 

@@ -107,6 +107,8 @@ const JobApplicationDashboard = () => {
       tags: ["Comp. & Benefits", "H1B Sponsor Likely"],
       applicants: "200+",
       posted: "19 hours ago",
+      image:
+        "https://cdn.builtin.com/cdn-cgi/image/f=auto,fit=contain,w=200,h=200,q=100/https://builtinseattle.com/sites/www.builtinseattle.com/files/2024-10/rlogo.jpg",
     },
     {
       id: 2,
@@ -119,6 +121,8 @@ const JobApplicationDashboard = () => {
       tags: ["Skills Match", "Culture Fit"],
       applicants: "340+",
       posted: "2 days ago",
+      image:
+        "https://media.licdn.com/dms/image/v2/D4E0BAQFqiwiSMcKk6A/company-logo_200_200/company-logo_200_200/0/1724937022726/stripe_logo?e=2147483647&v=beta&t=--CED0oRQUupcr1Q2MktzOErO8NMpjCjxa4-JiqrGzU",
     },
     {
       id: 3,
@@ -131,6 +135,8 @@ const JobApplicationDashboard = () => {
       tags: ["Experience Match", "H1B Sponsor"],
       applicants: "500+",
       posted: "3 days ago",
+      image:
+        "https://i.pinimg.com/originals/01/ca/da/01cada77a0a7d326d85b7969fe26a728.jpg",
     },
   ];
 
@@ -308,7 +314,17 @@ const JobApplicationDashboard = () => {
               className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-4 flex"
             >
               <div className="w-16 h-16 rounded-lg bg-gray-700 flex items-center justify-center text-xl font-bold text-gray-300 mr-4">
-                {job.company.slice(0, 1)}
+                {job.image ? (
+                  <img
+                    src={job.image}
+                    alt={`${job.company} logo`}
+                    className="w-16 h-16 rounded-lg object-cover"
+                  />
+                ) : (
+                  <div className="w-16 h-16 rounded-lg bg-gray-700 flex items-center justify-center text-xl font-bold text-gray-300 mr-4">
+                    {job.company.slice(0, 1)}
+                  </div>
+                )}
               </div>
 
               <div className="flex-grow">
