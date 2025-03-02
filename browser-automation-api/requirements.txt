@@ -1,0 +1,9 @@
+langchain-openai
+browser-use
+python-dotenv
+asyncio
+requests
+flask
+flask-cors
+pytest
+pytest-asyncio
