@@ -860,7 +860,17 @@ const ProfileSetupForm = () => {
                   <label className="block text-sm font-medium text-gray-300 mb-1">
                     Agile/Scrum Experience?
                   </label>
-                  <select className="block w-full px-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200">
+                  <select
+                    value={formData.technicalSkills.agileExperience}
+                    onChange={(e) =>
+                      handleInputChange(
+                        "technicalSkills",
+                        "agileExperience",
+                        e.target.value
+                      )
+                    }
+                    className="block w-full px-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
+                  >
                     <option value="">Select an option</option>
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
@@ -890,63 +900,136 @@ const ProfileSetupForm = () => {
 
             {expanded.experience && (
               <div className="mt-4 space-y-6">
-                <div className="p-4 border border-gray-700 rounded-lg bg-gray-800/50">
-                  <h3 className="text-lg font-medium text-gray-200 mb-3">
-                    Experience 1
-                  </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-1">
-                        Company Name
-                      </label>
-                      <input
-                        type="text"
-                        className="block w-full px-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
-                        placeholder="Google"
-                      />
+                {formData.workExperience.map((experience, index) => (
+                  <div
+                    key={index}
+                    className="p-4 border border-gray-700 rounded-lg bg-gray-800/50"
+                  >
+                    <div className="flex justify-between items-center mb-3">
+                      <h3 className="text-lg font-medium text-gray-200">
+                        Experience {index + 1}
+                      </h3>
+                      {index > 0 && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setFormData((prev) => ({
+                              ...prev,
+                              workExperience: prev.workExperience.filter(
+                                (_, i) => i !== index
+                              ),
+                            }));
+                          }}
+                          className="text-rose-400 hover:text-rose-300"
+                        >
+                          Remove
+                        </button>
+                      )}
                     </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-1">
-                        Role/Title
-                      </label>
-                      <input
-                        type="text"
-                        className="block w-full px-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
-                        placeholder="Software Engineer Intern"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-1">
-                        Duration
-                      </label>
-                      <input
-                        type="text"
-                        className="block w-full px-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
-                        placeholder="June 2023 - August 2023"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-1">
-                        Location
-                      </label>
-                      <input
-                        type="text"
-                        className="block w-full px-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
-                        placeholder="Mountain View, CA"
-                      />
-                    </div>
-                    <div className="md:col-span-2">
-                      <label className="block text-sm font-medium text-gray-300 mb-1">
-                        Responsibilities & Achievements
-                      </label>
-                      <textarea
-                        className="block w-full px-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
-                        placeholder="Describe your responsibilities and achievements..."
-                        rows="3"
-                      ></textarea>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-300 mb-1">
+                          Company Name
+                        </label>
+                        <input
+                          type="text"
+                          value={experience.companyName}
+                          onChange={(e) =>
+                            handleInputChange(
+                              "workExperience",
+                              "companyName",
+                              e.target.value,
+                              index
+                            )
+                          }
+                          className="block w-full px-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
+                          placeholder="Google"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-300 mb-1">
+                          Role/Title
+                        </label>
+                        <input
+                          type="text"
+                          value={experience.role}
+                          onChange={(e) =>
+                            handleInputChange(
+                              "workExperience",
+                              "role",
+                              e.target.value,
+                              index
+                            )
+                          }
+                          className="block w-full px-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
+                          placeholder="Software Engineer Intern"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-300 mb-1">
+                          Duration
+                        </label>
+                        <input
+                          type="text"
+                          value={experience.duration}
+                          onChange={(e) =>
+                            handleInputChange(
+                              "workExperience",
+                              "duration",
+                              e.target.value,
+                              index
+                            )
+                          }
+                          className="block w-full px-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
+                          placeholder="June 2023 - August 2023"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-300 mb-1">
+                          Location
+                        </label>
+                        <input
+                          type="text"
+                          value={experience.location}
+                          onChange={(e) =>
+                            handleInputChange(
+                              "workExperience",
+                              "location",
+                              e.target.value,
+                              index
+                            )
+                          }
+                          className="block w-full px-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
+                          placeholder="Mountain View, CA"
+                        />
+                      </div>
+
+                      <div className="md:col-span-2">
+                        <label className="block text-sm font-medium text-gray-300 mb-1">
+                          Responsibilities & Achievements
+                        </label>
+                        <textarea
+                          value={experience.responsibilities}
+                          onChange={(e) =>
+                            handleInputChange(
+                              "workExperience",
+                              "responsibilities",
+                              e.target.value,
+                              index
+                            )
+                          }
+                          className="block w-full px-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
+                          placeholder="Describe your responsibilities and achievements..."
+                          rows="3"
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
+                ))}
 
                 <div className="text-center">
                   <button className="bg-gray-700 hover:bg-gray-600 text-gray-200 py-2 px-4 rounded-lg flex items-center mx-auto">
@@ -996,6 +1079,14 @@ const ProfileSetupForm = () => {
                   </label>
                   <textarea
                     required
+                    value={formData.projects.proudProject}
+                    onChange={(e) =>
+                      handleInputChange(
+                        "projects",
+                        "proudProject",
+                        e.target.value
+                      )
+                    }
                     className="block w-full px-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
                     placeholder="Describe the project, technologies used, your role, and the outcome..."
                     rows="4"
@@ -1009,6 +1100,14 @@ const ProfileSetupForm = () => {
                   </label>
                   <textarea
                     required
+                    value={formData.projects.biggestChallenge}
+                    onChange={(e) =>
+                      handleInputChange(
+                        "projects",
+                        "biggestChallenge",
+                        e.target.value
+                      )
+                    }
                     className="block w-full px-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
                     placeholder="Describe a significant challenge, your approach to solving it, and what you learned..."
                     rows="4"
@@ -1048,6 +1147,14 @@ const ProfileSetupForm = () => {
                   </p>
                   <textarea
                     required
+                    value={formData.behavioral.aboutYourself}
+                    onChange={(e) =>
+                      handleInputChange(
+                        "behavioral",
+                        "aboutYourself",
+                        e.target.value
+                      )
+                    }
                     className="block w-full px-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
                     rows="4"
                   ></textarea>
@@ -1063,6 +1170,14 @@ const ProfileSetupForm = () => {
                   </p>
                   <textarea
                     required
+                    value={formData.behavioral.careerDrive}
+                    onChange={(e) =>
+                      handleInputChange(
+                        "behavioral",
+                        "careerDrive",
+                        e.target.value
+                      )
+                    }
                     className="block w-full px-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
                     rows="4"
                   ></textarea>
@@ -1079,6 +1194,14 @@ const ProfileSetupForm = () => {
                   </p>
                   <textarea
                     required
+                    value={formData.behavioral.keyStrengths}
+                    onChange={(e) =>
+                      handleInputChange(
+                        "behavioral",
+                        "keyStrengths",
+                        e.target.value
+                      )
+                    }
                     className="block w-full px-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
                     rows="4"
                   ></textarea>
@@ -1095,6 +1218,14 @@ const ProfileSetupForm = () => {
                   </p>
                   <textarea
                     required
+                    value={formData.behavioral.workEnvironment}
+                    onChange={(e) =>
+                      handleInputChange(
+                        "behavioral",
+                        "workEnvironment",
+                        e.target.value
+                      )
+                    }
                     className="block w-full px-3 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-rose-500 focus:border-rose-500 text-gray-200"
                     rows="4"
                   ></textarea>
