@@ -58,11 +58,11 @@ const LandingPage = () => {
 
       {/* Hero Section */}
       <div className="container mx-auto px-6 py-16 flex flex-col items-center">
-        <div className="text-center max-w-3xl">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
+        <div className="text-center max-w-4xl">
+          <h1 className="text-4xl md:text-9xl lg:text-6xl font-thin mb-6 text-white text-nowrap p-5">
             AI Agent Applies to Jobs For You
           </h1>
-          <p className="text-lg md:text-xl text-pink-100 mb-8">
+          <p className="text-lg md:text-xl text-pink-100 mb-8 font-thin">
             Reclaim hours of your life with our AI job application agent. It
             automatically finds and applies to relevant positions while you
             focus on what matters most.
@@ -93,15 +93,15 @@ const LandingPage = () => {
         </div>
 
         {/* Features Section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-24 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-24 w-full font-thin">
           <div className="bg-gray-900/30 backdrop-blur-sm rounded-xl p-6 border border-pink-500/20 text-center">
             <div className="w-16 h-16 bg-gradient-to-br from-rose-500 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-4">
               <Search size={24} className="text-white" />
             </div>
-            <h3 className="text-xl font-semibold mb-2 text-white">
+            <h3 className="text-xl font-thin mb-2 text-white">
               Automated Applications
             </h3>
-            <p className="text-pink-100/80">
+            <p className="text-pink-100/80 font-thin">
               Our AI agent automatically finds and applies to relevant jobs,
               saving you countless hours of manual searching.
             </p>
@@ -110,7 +110,7 @@ const LandingPage = () => {
             <div className="w-16 h-16 bg-gradient-to-br from-rose-500 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-4">
               <Bell size={24} className="text-white" />
             </div>
-            <h3 className="text-xl font-semibold mb-2 text-white">
+            <h3 className="text-xl font-thin mb-2 text-white">
               Real-time Updates
             </h3>
             <p className="text-pink-100/80">
@@ -122,7 +122,7 @@ const LandingPage = () => {
             <div className="w-16 h-16 bg-gradient-to-br from-rose-500 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-4">
               <ChevronRight size={24} className="text-white" />
             </div>
-            <h3 className="text-xl font-semibold mb-2 text-white">
+            <h3 className="text-xl font-thin mb-2 text-white">
               Time-Saving Analytics
             </h3>
             <p className="text-pink-100/80">
