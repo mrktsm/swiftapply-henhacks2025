@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  PieChart,
   Pie,
   Cell,
   BarChart,
@@ -23,10 +22,32 @@ import {
   Bell,
 } from "lucide-react";
 import ProgressCircle from "./components/ui/progressCircle";
+import ConcentricProgressCircles from "./components/ui/ConcentricProgressCircles";
 
 const JobApplicationDashboard = () => {
   const [expandedStats, setExpandedStats] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+
+  const multipleRings = [
+    {
+      name: "move",
+      percentage: 75, // 75% complete
+      color: "gradient", // Will use the pink-to-red gradient
+      icon: "\uF105", // FontAwesome icon code
+    },
+    {
+      name: "exercise",
+      percentage: 45, // 45% complete
+      color: "#a0ff03", // Green color
+      icon: "\uF101", // FontAwesome icon code
+    },
+    {
+      name: "stand",
+      percentage: 90, // 90% complete
+      color: "#1ad5de", // Blue color
+      icon: "\uF106", // FontAwesome icon code
+    },
+  ];
 
   // Simulate loading effect for demo
   useEffect(() => {
@@ -150,40 +171,52 @@ const JobApplicationDashboard = () => {
         </div>
       </header>
 
-      <div className="container mx-auto px-6 py-8">
+      <div className="container mx-auto px-6 py-4">
         {/* Dashboard Stats */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-          <div className=" rounded-xl shadow-sm border border-gray-100 overflow-hidden col-span-2 transform transition-transform hover:scale-[1.01] duration-300">
+          <div className="rounded-xl shadow-sm border border-gray-100 overflow-hidden col-span-2 transform transition-transform hover:scale-[1.01] duration-300">
             <div className="p-6">
               <div className="mb-6">
                 <h2 className="text-xl font-medium text-gray-800 text-left">
                   Application Overview
                 </h2>
               </div>
-
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="flex flex-col items-center justify-center p-4">
+                <div className="flex flex-col items-center justify-center p-2">
                   <div className="relative mb-2">
                     <ProgressCircle
-                      percentage={50}
-                      radius={70}
-                      strokeWidth={15}
+                      percentage={54}
+                      radius={90}
+                      strokeWidth={24}
                       isLoading={loading}
                     />
                     <div className="absolute inset-0 flex items-center justify-center text-3xl font-semibold text-gray-800">
                       {stats.totalApplications}
                     </div>
                   </div>
-                  <div className="text-gray-500 font-medium">
+                  <div className="text-gray-500 font-medium mt-2">
                     Total Applications
                   </div>
                 </div>
-
-                <div className="flex flex-col items-center justify-center p-4">
+                <div className="flex flex-col items-center justify-center p-2 -mt-25">
+                  <div className="relative mb-2">
+                    <ConcentricProgressCircles
+                      rings={multipleRings}
+                      showLabels={false}
+                    />
+                    {/* <div className="absolute inset-0 flex items-center justify-center text-2xl font-semibold text-gray-800">
+                {stats.interviews}
+              </div> */}
+                  </div>
+                  <div className="text-gray-500 font-medium -mt-25">
+                    Interviews
+                  </div>
+                </div>
+                <div className="flex flex-col items-center justify-center">
                   <div className="relative mb-2">
                     <ProgressCircle
                       percentage={50}
-                      radius={70}
+                      radius={60}
                       strokeWidth={15}
                       isLoading={loading}
                     />
@@ -194,24 +227,6 @@ const JobApplicationDashboard = () => {
                   <div className="text-gray-500 font-medium">
                     Avg. Compatibility
                   </div>
-                </div>
-
-                <div className="flex flex-col items-center justify-center p-4">
-                  <div className="relative mb-2">
-                    <ProgressCircle
-                      percentage={Math.round(
-                        (stats.interviews / stats.totalApplications) * 100
-                      )}
-                      radius={40}
-                      strokeWidth={8}
-                      isLoading={loading}
-                      color="#8B5CF6"
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center text-2xl font-semibold text-gray-800">
-                      {stats.interviews}
-                    </div>
-                  </div>
-                  <div className="text-gray-500 font-medium">Interviews</div>
                 </div>
               </div>
             </div>
