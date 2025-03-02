@@ -15,7 +15,7 @@ const LandingPage = () => {
       <div className="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg viewBox=%270 0 200 200%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27noiseFilter%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.65%27 numOctaves=%273%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23noiseFilter)%27/%3E%3C/svg%3E')] -z-10"></div>
 
       {/* Header - Navigation bar with blur effect */}
-      <header className="bg-gray-900 bg-opacity-30 backdrop-blur-md border-b border-gray-800/50 sticky top-0 z-10">
+      <header className="bg-gray-800 bg-opacity-30 backdrop-blur-md border-b border-gray-800/50 sticky top-0 z-10">
         <div className="container mx-auto px-6 h-16 flex items-center justify-between">
           <h1 className="text-2xl text-white font-thin">
             <div className="flex justify-between items-center">
@@ -142,6 +142,9 @@ const LandingPage = () => {
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center mb-4 md:mb-0"></div>
+            <p className="text-center text-white text-sm">
+              Made for Henhacks 2024
+            </p>
           </div>
         </div>
       </footer>
