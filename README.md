@@ -1,8 +1,8 @@
 # SwiftApply
 
 <div style="display: flex; justify-content: space-between;">
-  <img height="262.5" alt="Screenshot_2025-03-02_at_7 56 43_AM" src="https://github.com/user-attachments/assets/05fb9463-bc16-448f-8860-6f25aebc9bd9" />
-  <img height="262.5" alt="image" src="https://github.com/user-attachments/assets/ac575ab9-e710-464b-8ed1-d27405cab59d" />
+  <img  alt="Screenshot_2025-03-02_at_7 56 43_AM" src="https://github.com/user-attachments/assets/05fb9463-bc16-448f-8860-6f25aebc9bd9" />
+  <img  alt="image" src="https://github.com/user-attachments/assets/ac575ab9-e710-464b-8ed1-d27405cab59d" />
 </div>
 
 
