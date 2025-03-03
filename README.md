@@ -6,6 +6,9 @@
   <img alt="Dark" src="https://github.com/user-attachments/assets/ac575ab9-e710-464b-8ed1-d27405cab59d" width="45%">
 </p>
 
+[Watch the demo video here!](https://www.youtube.com/watch?v=3uyix55LC88)
+
+
 ## Inspiration 
 As computer science students, we struggled to balance coursework, projects, and the overwhelming task of applying to internships and jobs. The repetitive nature of filling out applications, tweaking resumes, and crafting cover letters took valuable time away from learning and growing our skills. We envisioned an AI-powered assistant that could streamline the application process, allowing students to focus on what truly matters—building their careers.
 
