@@ -1,6 +1,10 @@
 # SwiftApply
 
-<img width="1440" alt="Screenshot_2025-03-02_at_7 56 43_AM" src="https://github.com/user-attachments/assets/05fb9463-bc16-448f-8860-6f25aebc9bd9" />
+<div style="display: flex; justify-content: space-between;">
+  <img height="262.5" alt="Screenshot_2025-03-02_at_7 56 43_AM" src="https://github.com/user-attachments/assets/05fb9463-bc16-448f-8860-6f25aebc9bd9" />
+  <img height="262.5" alt="image" src="https://github.com/user-attachments/assets/ac575ab9-e710-464b-8ed1-d27405cab59d" />
+</div>
+
 
 ## Inspiration 
 As computer science students, we struggled to balance coursework, projects, and the overwhelming task of applying to internships and jobs. The repetitive nature of filling out applications, tweaking resumes, and crafting cover letters took valuable time away from learning and growing our skills. We envisioned an AI-powered assistant that could streamline the application process, allowing students to focus on what truly matters—building their careers.
