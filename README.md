@@ -1,7 +1,6 @@
 # SwiftApply
+![lrs;0; 1  (4)](https://github.com/user-attachments/assets/56fe8e60-494e-4cbf-9c9f-5eb7cc25da12)
 
-  <img alt="Light" src="https://github.com/user-attachments/assets/05fb9463-bc16-448f-8860-6f25aebc9bd9">
-  <img alt="Dark" src="https://github.com/user-attachments/assets/ac575ab9-e710-464b-8ed1-d27405cab59d">
 
 [Watch the demo video here!](https://www.youtube.com/watch?v=3uyix55LC88)
 
